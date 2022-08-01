@@ -1,0 +1,62 @@
+package com.vttp2022.BicycleParkingApp.services;
+
+import java.util.Optional;
+
+import org.slf4j.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.vttp2022.BicycleParkingApp.models.Parkings;
+import com.vttp2022.BicycleParkingApp.models.Query;
+import com.vttp2022.BicycleParkingApp.oldClasses.Parking;
+
+@Service
+public class ParkingAPIService {
+  private static final Logger logger = LoggerFactory.getLogger(ParkingAPIService.class);
+
+  private static String URL = "http://datamall2.mytransport.sg/ltaodataservice/BicycleParkingv2";
+
+  public Optional<Parkings> findParking(Query q){
+    String apiKey = System.getenv("BICYCLE_PARKING_API_KEY");
+    //String accept = "application/json";
+
+    String parkingUrl = UriComponentsBuilder.fromUriString(URL)
+      .queryParam("Lat", q.getLat())
+      .queryParam("Long", q.getLng())
+      .queryParam("Dist", q.getRadius())
+      .toUriString();
+    logger.info(parkingUrl);
+    RestTemplate template = new RestTemplate();
+    ResponseEntity<String> resp = null;
+
+    try {
+      HttpHeaders headers = new HttpHeaders();
+      headers.set("AccountKey", apiKey);
+      //headers.set("accept", accept);
+      HttpEntity request = new HttpEntity(headers);
+
+      resp = template.exchange(parkingUrl, HttpMethod.GET, request, String.class, 1);
+      logger.info(resp.getBody());
+      Parkings p = Parkings.createJson(resp.getBody());
+      return Optional.of(p);
+    } catch (Exception e) {
+      logger.error(e.getMessage());
+      e.printStackTrace();
+    }
+    return Optional.empty();
+  }
+
+  /* 
+  public String parkingComponentDynamicBuilder(String url, MultiValueMap<String, String> multiFrmTo){
+    return UriComponentsBuilder.fromUriString(url)
+      .queryParams(multiFrmTo)
+      .toUriString();
+  }
+  */
+  
+}

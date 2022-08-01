@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bicycle Parking</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
+    integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" 
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body th:object="${parkings}">
+  <div class="container">
+    <h1>Find Bicycle Parking</h1>
+    <div class="row mt-5">
+      <div class="col">
+        <form method="GET" action="BicycleParking">
+          <div class="input-group">
+            <!---->
+            <input type="text" 
+                name="Lat" 
+                id="Lat" 
+                class="form-control" 
+                required placeholder="Enter latitude"
+            />
+            <input type="text" 
+                name="Lng" 
+                id="Lng" 
+                class="form-control" 
+                required placeholder="Enter longitude"
+            />
+            <!---->
+            <!--
+            <input
+                    type="text"
+                    th:name="lat"
+                    th:id="lat"
+                    class="form-control"
+                    th:field="*{lat}"
+                    required
+                    placeholder="Enter latitude"
+            />
+            <input
+                    type="text"
+                    th:name="lng"
+                    th:id="lng"
+                    class="form-control"
+                    th:field="*{lng}"
+                    required
+                    placeholder="Enter longitude"
+            />
+            -->
+            <select name="Dist" id="Dist">
+              <option value="">Radius</option>
+              <option value="0.25">250m</option>
+              <option value="0.5">500m</option>
+              <option value="1.0">1km</option>
+              <option value="2.0">2km</option>
+              <option value="5.0">5km</option>
+            </select>
+            <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+</body>
+</html>
