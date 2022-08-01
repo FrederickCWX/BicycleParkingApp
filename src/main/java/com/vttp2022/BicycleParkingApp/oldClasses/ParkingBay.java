@@ -1,9 +1,9 @@
 package com.vttp2022.BicycleParkingApp.oldClasses;
-
+/*
 import java.math.BigDecimal;
 
 import org.slf4j.*;
-
+*/
 public class ParkingBay {
   /*
   private static final Logger logger = LoggerFactory.getLogger(Parking.class);

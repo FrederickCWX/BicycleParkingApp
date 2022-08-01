@@ -1,5 +1,5 @@
 package com.vttp2022.BicycleParkingApp.oldClasses;
-
+/*
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import org.slf4j.*;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;;
-
+*/
 public class Parking {
   /*
   private static final Logger logger = LoggerFactory.getLogger(Parking.class);

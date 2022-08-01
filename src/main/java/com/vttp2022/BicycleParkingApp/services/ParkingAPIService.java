@@ -13,7 +13,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vttp2022.BicycleParkingApp.models.Parkings;
 import com.vttp2022.BicycleParkingApp.models.Query;
-import com.vttp2022.BicycleParkingApp.oldClasses.Parking;
 
 @Service
 public class ParkingAPIService {
@@ -50,13 +49,5 @@ public class ParkingAPIService {
     }
     return Optional.empty();
   }
-
-  /* 
-  public String parkingComponentDynamicBuilder(String url, MultiValueMap<String, String> multiFrmTo){
-    return UriComponentsBuilder.fromUriString(url)
-      .queryParams(multiFrmTo)
-      .toUriString();
-  }
-  */
   
 }

@@ -67,14 +67,6 @@ public class Value {
   public void setShelter(String shelter) {
     this.shelter = shelter;
   }
-  /*
-   * private String description;
-  private BigDecimal lat;
-  private BigDecimal lng;
-  private String rackType;
-  private Integer rackCount;
-  private String shelter;
-   */
 
   public static Value createJson(JsonObject jo){
     logger.info("createJson value");
@@ -101,40 +93,5 @@ public class Value {
     );
     return v;
   }
-
-  /*
-  public static Query createJson(JsonObject jo){
-    logger.info("createJson query");
-    Query q = new Query();
-    JsonNumber jnLat = jo.getJsonNumber("Lat");
-    q.lat = jnLat.bigDecimalValue();
-    JsonNumber jnLng = jo.getJsonNumber("Long");
-    q.lng = jnLng.bigDecimalValue();
-    JsonNumber jnRad = jo.getJsonNumber("Dist");
-    q.dist = jnRad.doubleValue();
-    return q;
-  }
-  */
-
-  /* 
-  public static Parkings createJson(String json) throws IOException{
-    logger.info("createJson parkings");
-    Parkings p = new Parkings();
-    
-
-    try(InputStream in = new ByteArrayInputStream(json.getBytes())){
-      JsonReader jr = Json.createReader(in);
-      
-      JsonObject jo = jr.readObject();
-      //JsonArray ja = new StringReader(jo).readArray();
-      logger.info(">>>>> " + jo.getJsonObject("query"));
-      p.query = Query.createJson(jo.getJsonObject("query"));
-      p.value = jo.getJsonArray("value");
-
-      logger.info(">>>>> " + p.toString());
-    }
-    return p;
-  }
-  */
   
 }
