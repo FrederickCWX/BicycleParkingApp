@@ -1,6 +1,5 @@
 package com.vttp2022.BicycleParkingApp.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +33,6 @@ public class ParkingController {
 
   @GetMapping
   public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model){
-    //Parkings p = new Parkings();
-    //Postal pos = new Postal();
     Query q = new Query();
     PostalQuery pq = new PostalQuery();
     pq.setPostalCode(Integer.parseInt(postal));
@@ -59,8 +56,6 @@ public class ParkingController {
     logger.info(postal+","+radius);
     Optional<Parkings> optParking = parkingSvc.findParking(q);
 
-    
-
     if(optParking.isEmpty()){
       model.addAttribute("parkings", new Parkings());
       return "BicycleParking";
@@ -83,45 +78,4 @@ public class ParkingController {
     return "BicycleParking";
   }
 
-  /*
-  @GetMapping
-  public String parking(@RequestParam(value = "Lat", required = true) String lat, @RequestParam(value = "Lng", required = true) String lng, @RequestParam(value = "Dist", required = false) String radius, Model model){
-    Parkings p = new Parkings();
-    Query q = new Query();
-    q.setLat(new BigDecimal(lat));
-    q.setLng(new BigDecimal(lng));
-    q.setRadius(Double.parseDouble(radius));
-    logger.info(String.valueOf(q.getRadius()));
-    logger.info("test");
-    logger.info(lat+","+lng+","+radius);
-    Optional<Parkings> optParking = parkingSvc.findParking(q);
-
-    
-
-    if(optParking.isEmpty()){
-      model.addAttribute("parkings", new Parkings());
-      return "BicycleParking";
-    }
-    logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
-
-    List<Value> value = Parkings.getValue();
-    //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
-    String info = "There are "+value.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of "+q.getLat()+", "+q.getLng();
-    logger.info(info);
-    model.addAttribute("respDetails", info);
-    if(value.size() > 0){
-      //TODO
-      //Send data back to html page for user
-      model.addAttribute("details", value);
-    }
-
-    model.addAttribute("Lat", q.getLat());
-    model.addAttribute("Lng", q.getLng());
-    model.addAttribute("Radius", q.getRadius());
-
-    return "BicycleParking";
-  }
-  */
-
-  
 }

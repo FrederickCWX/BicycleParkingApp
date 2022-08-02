@@ -39,7 +39,7 @@ public class Results {
   }
 
   public static Results createJson(JsonObject jo){
-    //logger.info("createJson results");
+    logger.info("createJson results");
     Results r = new Results();
     JsonString jsSearchVal = jo.getJsonString("SEARCHVAL");
     r.searchVal = jsSearchVal.getString();
