@@ -27,7 +27,7 @@ public class ParkingController {
   private ParkingAPIService parkingSvc;
 
   @GetMapping
-  public String parking(@RequestParam(required = true) String lat, @RequestParam(required = true) String lng, @RequestParam(required = false) String radius, Model model){
+  public String parkings(@RequestParam(required = true) String lat, @RequestParam(required = true) String lng, @RequestParam(required = false) String radius, Model model){
     Query q = new Query();
     q.setLat(new BigDecimal(lat));
     q.setLng(new BigDecimal(lng));
@@ -40,6 +40,8 @@ public class ParkingController {
     }
     Optional<Parkings> optParking = parkingSvc.findParking(q);
 
+    
+
     if(optParking.isEmpty()){
       model.addAttribute("parkings", new Parkings());
       return "BicycleParking";
@@ -47,6 +49,9 @@ public class ParkingController {
     logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
 
     List<Value> response = Parkings.getValue();
+    //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
+    //String info = "There are "+response.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of "+q.getLat()+", "+q.getLng();
+    //logger.info(info);
     if(response.size() > 0){
       //TODO
       //Send data back to html page for user

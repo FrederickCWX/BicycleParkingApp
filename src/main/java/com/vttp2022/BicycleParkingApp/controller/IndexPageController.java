@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.vttp2022.BicycleParkingApp.models.Parkings;
 import com.vttp2022.BicycleParkingApp.models.Query;
 
+import org.slf4j.*;
+
 @Controller
 public class IndexPageController {
+  private static final Logger logger = LoggerFactory.getLogger(IndexPageController.class);
 
   @GetMapping("/")
   public String showIndexPage(Model model){
