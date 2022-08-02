@@ -48,13 +48,13 @@ public class Parkings {
   public static Parkings createJson(String json) throws IOException{
     logger.info("createJson parkings");
     Parkings p = new Parkings();
-    logger.info(json);
+    //logger.info(json);
 
     try(InputStream in = new ByteArrayInputStream(json.getBytes())){
       JsonReader jr = Json.createReader(in);
       
       JsonObject jo = jr.readObject();
-      logger.info(">>>>> " + jo.getJsonArray("value"));;
+      //logger.info(">>>>> " + jo.getJsonArray("value"));;
       JsonArray ja = jo.getJsonArray("value");
 
       if(ja != null){
@@ -63,6 +63,7 @@ public class Parkings {
           JsonObject joValue = (JsonObject) jv;
           requested.add(Value.createJson(joValue));
         }
+        logger.info("createJson value");
         Parkings.details = requested;
       }
       logger.info(">>>>> " + p.toString());

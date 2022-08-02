@@ -40,7 +40,7 @@ public class ParkingAPIService {
       HttpEntity request = new HttpEntity(headers);
 
       resp = template.exchange(parkingUrl, HttpMethod.GET, request, String.class, 1);
-      logger.info(resp.getBody());
+      //logger.info(resp.getBody());
       Parkings p = Parkings.createJson(resp.getBody());
       return Optional.of(p);
     } catch (Exception e) {

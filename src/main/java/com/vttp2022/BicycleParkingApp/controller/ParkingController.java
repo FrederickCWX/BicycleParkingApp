@@ -31,14 +31,7 @@ public class ParkingController {
     Query q = new Query();
     q.setLat(new BigDecimal(lat));
     q.setLng(new BigDecimal(lng));
-    logger.info("test");
-    if(radius != null){
-      q.setRadius(Double.parseDouble(radius));
-    }else{
-      //TODO
-      //change back default to 0.5
-      q.setRadius(0.16);
-    }
+    q.setRadius(Double.parseDouble(radius));
     logger.info(String.valueOf(q.getRadius()));
     logger.info("test");
     logger.info(lat+","+lng+","+radius);

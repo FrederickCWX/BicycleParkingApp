@@ -67,7 +67,7 @@ public class Value {
   }
 
   public static Value createJson(JsonObject jo){
-    logger.info("createJson value");
+    //logger.info("createJson value");
     Value v = new Value();
     JsonString jsDesp = jo.getJsonString("Description");
     v.description = jsDesp.getString();
@@ -81,6 +81,7 @@ public class Value {
     v.rackCount = jnCount.intValue();
     JsonString jsShelter = jo.getJsonString("ShelterIndicator");
     v.shelter = jsShelter.getString();
+    /*
     logger.info(
       "Description: "+v.description+"\n"+
       "Latitude: "+v.lat+"\n"+
@@ -89,6 +90,7 @@ public class Value {
       "RackCount: "+v.rackCount+"\n"+
       "ShelterIndicator: "+v.shelter
     );
+    */
     return v;
   }
   
