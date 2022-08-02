@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-//import com.vttp2022.BicycleParkingApp.models.Parking;
 import com.vttp2022.BicycleParkingApp.models.Parkings;
 import com.vttp2022.BicycleParkingApp.models.Query;
 import com.vttp2022.BicycleParkingApp.models.Value;
@@ -27,10 +26,12 @@ public class ParkingController {
   private ParkingAPIService parkingSvc;
 
   @GetMapping
-  public String parkings(@RequestParam(required = true) String lat, @RequestParam(required = true) String lng, @RequestParam(required = false) String radius, Model model){
+  public String parking(@RequestParam(value = "Lat", required = true) String lat, @RequestParam(value = "Lng", required = true) String lng, @RequestParam(value = "Dist", required = false) String radius, Model model){
+    Parkings p = new Parkings();
     Query q = new Query();
     q.setLat(new BigDecimal(lat));
     q.setLng(new BigDecimal(lng));
+    logger.info("test");
     if(radius != null){
       q.setRadius(Double.parseDouble(radius));
     }else{
@@ -38,6 +39,9 @@ public class ParkingController {
       //change back default to 0.5
       q.setRadius(0.16);
     }
+    logger.info(String.valueOf(q.getRadius()));
+    logger.info("test");
+    logger.info(lat+","+lng+","+radius);
     Optional<Parkings> optParking = parkingSvc.findParking(q);
 
     
@@ -48,13 +52,15 @@ public class ParkingController {
     }
     logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
 
-    List<Value> response = Parkings.getValue();
+    List<Value> value = Parkings.getValue();
     //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
-    //String info = "There are "+response.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of "+q.getLat()+", "+q.getLng();
-    //logger.info(info);
-    if(response.size() > 0){
+    String info = "There are "+value.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of "+q.getLat()+", "+q.getLng();
+    logger.info(info);
+    model.addAttribute("respDetails", info);
+    if(value.size() > 0){
       //TODO
       //Send data back to html page for user
+      model.addAttribute("details", value);
     }
 
     model.addAttribute("Lat", q.getLat());

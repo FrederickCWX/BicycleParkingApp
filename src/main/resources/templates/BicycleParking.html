@@ -18,16 +18,24 @@
     <div class="row">
         <div class="col">
             <h1>Bicycle Parking</h1>
+            <b><span th:text="${respDetails}"></span></b>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <p data-th-text="${currency.query.amount}"></p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p data-th-text="${currency.result}"></p>
+            <ul
+                role="list"
+                class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                th:each="detail : *{details}"
+            >
+                <li>Description: <span th:text="${detail.description}"></span></li>
+                <li>Latitude: <span th:text="${detail.lat}"></span></li>
+                <li>Longitude: <span th:text="${detail.lng}"></span></li>
+                <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
+                <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
+                <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>
+            </ul>
+            <!--<p data-th-text="${currency.query.amount}"></p>-->
         </div>
     </div>
 </div>

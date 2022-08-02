@@ -4,14 +4,12 @@ import java.math.BigDecimal;
 
 import org.slf4j.*;
 
-import com.vttp2022.BicycleParkingApp.oldClasses.Parking;
-
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonString;
 
 public class Value {
-  private static final Logger logger = LoggerFactory.getLogger(Parking.class);
+  private static final Logger logger = LoggerFactory.getLogger(Value.class);
 
   private String description;
   private BigDecimal lat;
