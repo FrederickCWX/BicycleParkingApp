@@ -14,14 +14,14 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
-<body th:object="${parkings}">
+<body>
   <div class="container">
     <h1>Find Bicycle Parking</h1>
     <div class="row mt-5">
       <div class="col">
         <form method="GET" action="BicycleParking">
           <div class="input-group">
-            <!---->
+            <!--
             <input type="text" 
                 name="Lat" 
                 id="Lat" 
@@ -34,7 +34,15 @@
                 class="form-control" 
                 required placeholder="Enter longitude"
             >
-            <select name="Dist" id="Dist">
+            -->
+            <input th:object="${postal}"
+                type="text" 
+                name="PostalCode" 
+                id="PostalCode" 
+                class="form-control" 
+                required placeholder="Enter postal code"
+            >
+            <select  th:object="${parkings}" name="Dist" id="Dist">
               <option value="0.5">Radius</option>
               <option value="0.25">250m</option>
               <option value="0.5">500m</option>

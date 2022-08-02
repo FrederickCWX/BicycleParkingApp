@@ -64,7 +64,7 @@ public class Postal {
   }
 
   public static Postal createJson(String json) throws IOException{
-    logger.info("createJson parkings");
+    logger.info("createJson postal");
     Postal p = new Postal();
     //logger.info(json);
 
@@ -72,7 +72,7 @@ public class Postal {
       JsonReader jr = Json.createReader(in);
       
       JsonObject jo = jr.readObject();
-      //logger.info(">>>>> " + jo.getJsonArray("value"));;
+      logger.info(">>>>> " + jo.getJsonArray("results"));;
       JsonArray ja = jo.getJsonArray("results");
 
       if(ja != null){
