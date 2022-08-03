@@ -28,9 +28,12 @@
                 class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 th:each="detail : *{details}"
             >
+                <img th:src= "${detail.img}" width=350 height=350/>
                 <li>Description: <span th:text="${detail.description}"></span></li>
+                <!--
                 <li>Latitude: <span th:text="${detail.lat}"></span></li>
                 <li>Longitude: <span th:text="${detail.lng}"></span></li>
+                -->
                 <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
                 <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
                 <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>

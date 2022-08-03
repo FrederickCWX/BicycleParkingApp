@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vttp2022.BicycleParkingApp.models.Parkings;
-import com.vttp2022.BicycleParkingApp.models.Postal;
-import com.vttp2022.BicycleParkingApp.models.PostalQuery;
-import com.vttp2022.BicycleParkingApp.models.Query;
-import com.vttp2022.BicycleParkingApp.models.Results;
-import com.vttp2022.BicycleParkingApp.models.Value;
+import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
+import com.vttp2022.BicycleParkingApp.models.parking.Query;
+import com.vttp2022.BicycleParkingApp.models.parking.Value;
+import com.vttp2022.BicycleParkingApp.models.postal.Postal;
+import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
+import com.vttp2022.BicycleParkingApp.models.postal.Results;
 import com.vttp2022.BicycleParkingApp.services.ParkingAPIService;
 import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 
@@ -64,7 +64,7 @@ public class ParkingController {
 
     List<Value> value = Parkings.getValue();
     //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
-    String info = "There are "+value.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of S'pore "+pq.getPostalCode();
+    String info = "There are "+value.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of Singapore "+pq.getPostalCode();
     logger.info(info);
     model.addAttribute("respDetails", info);
     if(value.size() > 0){

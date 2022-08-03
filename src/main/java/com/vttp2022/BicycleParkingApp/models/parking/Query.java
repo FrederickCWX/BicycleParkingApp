@@ -1,4 +1,4 @@
-package com.vttp2022.BicycleParkingApp.models;
+package com.vttp2022.BicycleParkingApp.models.parking;
 
 import java.math.BigDecimal;
 

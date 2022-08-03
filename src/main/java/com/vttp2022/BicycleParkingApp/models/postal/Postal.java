@@ -1,4 +1,4 @@
-package com.vttp2022.BicycleParkingApp.models;
+package com.vttp2022.BicycleParkingApp.models.postal;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

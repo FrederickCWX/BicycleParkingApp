@@ -1,4 +1,4 @@
-package com.vttp2022.BicycleParkingApp.models;
+package com.vttp2022.BicycleParkingApp.models.parking;
 
 import java.math.BigDecimal;
 
@@ -11,12 +11,22 @@ import jakarta.json.JsonString;
 public class Value {
   private static final Logger logger = LoggerFactory.getLogger(Value.class);
 
+
+  private String img;
   private String description;
   private BigDecimal lat;
   private BigDecimal lng;
   private String rackType;
   private Integer rackCount;
   private String shelter;
+
+  public String getImg() {
+    return img;
+  }
+
+  public void setImg(String img) {
+    this.img = img;
+  }
 
   public String getDescription() {
     return description;
@@ -81,6 +91,8 @@ public class Value {
     v.rackCount = jnCount.intValue();
     JsonString jsShelter = jo.getJsonString("ShelterIndicator");
     v.shelter = jsShelter.getString();
+    v.img = createImgURL(v.lat, v.lng);
+    //logger.info(v.img);
     /*
     logger.info(
       "Description: "+v.description+"\n"+
@@ -92,6 +104,23 @@ public class Value {
     );
     */
     return v;
+  }
+
+  public static String createImgURL(BigDecimal lat, BigDecimal lng){
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=default&lat=");
+    sb.append(String.valueOf(lat));
+    sb.append("&lng=");
+    sb.append(String.valueOf(lng));
+    sb.append("&zoom=17&height=350&width=350&polygons=&lines=&points=[");
+    sb.append(String.valueOf(lat));
+    sb.append(",");
+    sb.append(String.valueOf(lng));
+    sb.append(",\"255,0,0\",\"\"]&color=&fillColor=");
+    String url = sb.toString();
+
+    return url;
   }
   
 }

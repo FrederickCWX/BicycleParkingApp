@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.vttp2022.BicycleParkingApp.models.Parkings;
-import com.vttp2022.BicycleParkingApp.models.Query;
+import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
+import com.vttp2022.BicycleParkingApp.models.parking.Query;
 
 @Service
 public class ParkingAPIService {

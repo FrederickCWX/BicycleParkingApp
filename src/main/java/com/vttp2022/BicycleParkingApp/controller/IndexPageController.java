@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.vttp2022.BicycleParkingApp.models.Parkings;
-import com.vttp2022.BicycleParkingApp.models.Postal;
-import com.vttp2022.BicycleParkingApp.models.PostalQuery;
-import com.vttp2022.BicycleParkingApp.models.Query;
+import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
+import com.vttp2022.BicycleParkingApp.models.parking.Query;
+import com.vttp2022.BicycleParkingApp.models.postal.Postal;
+import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
 
 import org.slf4j.*;
 
