@@ -1,12 +1,12 @@
 package com.vttp2022.BicycleParkingApp.services;
 
-import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
+import com.vttp2022.BicycleParkingApp.models.parking.Value;
 
 public interface ParkingRepo {
-  public int save(final Parkings prk);
+  public int save(final Value val);
 
-  public Parkings findById(final String prkId);
+  public Value findById(final String valId);
 
-  public int update(final Parkings prk);
+  public int update(final Value val);
   
 }

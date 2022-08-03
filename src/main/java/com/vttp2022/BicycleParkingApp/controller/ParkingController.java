@@ -49,11 +49,7 @@ public class ParkingController {
       q.setLat(results.get(0).getLatitude());
       q.setLng(results.get(0).getLongitude());
     }
-    logger.info("test");
-    logger.info(String.valueOf(q.getLng()));
     q.setRadius(Double.parseDouble(radius));
-    logger.info(String.valueOf(q.getRadius()));
-    logger.info(postal+","+radius);
     Optional<Parkings> optParking = parkingSvc.findParking(q);
 
     if(optParking.isEmpty()){
@@ -64,7 +60,8 @@ public class ParkingController {
 
     List<Value> value = Parkings.getValue();
     //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
-    String info = "There are "+value.size()+" bicycle parking bay(s) within "+q.getRadius()+"km of Singapore "+pq.getPostalCode();
+
+    String info = "There are "+value.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
     logger.info(info);
     model.addAttribute("respDetails", info);
     if(value.size() > 0){

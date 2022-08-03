@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bicycle Parking</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicycle Parking</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
     integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -19,25 +19,86 @@
         <div class="col">
             <h1>Bicycle Parking</h1>
             <b><span th:text="${respDetails}"></span></b>
+            <br><br><br>
         </div>
     </div>
     <div class="row">
         <div class="col">
+            <table th:each="detail : *{details}">
+                <tr>
+                    <td rowspan="8"><img th:src= "${detail.img}" width=500 height=350/></td>
+                    <td rowspan="8">&nbsp</td>
+                    <td rowspan="8">&nbsp</td>
+                    <td rowspan="8">&nbsp</td>
+                    <td rowspan="8">&nbsp</td>
+                    <td><br/></td>
+                    <td><br/></td>
+                </tr>
+                <tr>
+                    <td><br/></td>
+                    <td><br/></td>
+                </tr>
+                <tr>
+                    <td>Description: </td>
+                    <td><span th:text="${detail.description}"></span></td>
+                </tr>
+                <tr>
+                    <td>Rack Type: </td>
+                    <td><span th:text="${detail.rackType}"></span></td>
+                </tr>
+                <tr>
+                    <td>Rack Count: </td>
+                    <td><span th:text="${detail.rackCount}"></span></td>
+                </tr>
+                <tr>
+                    <td>Sheltered bay: </td>
+                    <td><span th:text="${detail.shelter}"></span></td>
+                </tr>
+                <tr>
+                    <td><br/></td>
+                    <td><br/></td>
+                </tr>
+                <tr>
+                    <td><br/></td>
+                    <td><br/></td>
+                </tr>
+            </table>
+            <!--
+            <table th:each="detail : *{details}">
+                <tr>
+                    <td colspan="2"><img th:src= "${detail.img}" width=500 height=350/></td>
+                </tr>
+                <tr>
+                    <td>Description: </td>
+                    <td><span th:text="${detail.description}"></span></td>
+                </tr>
+                <tr>
+                    <td>Rack Type: </td>
+                    <td><span th:text="${detail.rackType}"></span></td>
+                </tr>
+                <tr>
+                    <td>Rack Count: </td>
+                    <td><span th:text="${detail.rackCount}"></span></td>
+                </tr>
+                <tr>
+                    <td>Sheltered bay: </td>
+                    <td><span th:text="${detail.shelter}"></span></td>
+                </tr>
+              </table>
+            -->
+            <!--
             <ul
                 role="list"
                 class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 th:each="detail : *{details}"
             >
-                <img th:src= "${detail.img}" width=350 height=350/>
+                <img th:src= "${detail.img}" width=500 height=350/>
                 <li>Description: <span th:text="${detail.description}"></span></li>
-                <!--
-                <li>Latitude: <span th:text="${detail.lat}"></span></li>
-                <li>Longitude: <span th:text="${detail.lng}"></span></li>
-                -->
                 <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
                 <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
                 <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>
             </ul>
+            -->
         </div>
     </div>
 </div>

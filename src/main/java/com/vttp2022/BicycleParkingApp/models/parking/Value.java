@@ -1,6 +1,8 @@
 package com.vttp2022.BicycleParkingApp.models.parking;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Random;
 
 import org.slf4j.*;
 
@@ -8,10 +10,10 @@ import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonString;
 
-public class Value {
+public class Value implements Serializable{
   private static final Logger logger = LoggerFactory.getLogger(Value.class);
 
-
+  private String id;
   private String img;
   private String description;
   private BigDecimal lat;
@@ -19,6 +21,18 @@ public class Value {
   private String rackType;
   private Integer rackCount;
   private String shelter;
+
+  public Value(){
+    this.id = generateId(8);
+  }
+
+  public String getId(){
+    return id;
+  }
+
+  public void setId(String id){
+    this.id = id;
+  }
 
   public String getImg() {
     return img;
@@ -76,6 +90,15 @@ public class Value {
     this.shelter = shelter;
   }
 
+  private synchronized String generateId(int numchars) {
+    Random r = new Random();
+    StringBuilder strBuilder = new StringBuilder();
+    while (strBuilder.length() < numchars) {
+        strBuilder.append(Integer.toHexString(r.nextInt()));
+    }
+    return strBuilder.toString().substring(0, numchars);
+}
+
   public static Value createJson(JsonObject jo){
     //logger.info("createJson value");
     Value v = new Value();
@@ -113,7 +136,8 @@ public class Value {
     sb.append(String.valueOf(lat));
     sb.append("&lng=");
     sb.append(String.valueOf(lng));
-    sb.append("&zoom=17&height=350&width=350&polygons=&lines=&points=[");
+    //sb.append("&zoom=17&height=350&width=350&polygons=&lines=&points=[");
+    sb.append("&zoom=17&height=350&width=500&polygons=&lines=&points=[");
     sb.append(String.valueOf(lat));
     sb.append(",");
     sb.append(String.valueOf(lng));
