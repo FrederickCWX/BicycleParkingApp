@@ -45,12 +45,12 @@ public class ParkingController {
       return "BicycleParking";
     }
     List<Results> results = Postal.getResults();
-    if(results.size() == 1){
-      for(Results result: results){
-        q.setLat(result.getLatitude());
-        q.setLng(result.getLongitude());
-      }
+    if(results.size() >= 1){
+      q.setLat(results.get(0).getLatitude());
+      q.setLng(results.get(0).getLongitude());
     }
+    logger.info("test");
+    logger.info(String.valueOf(q.getLng()));
     q.setRadius(Double.parseDouble(radius));
     logger.info(String.valueOf(q.getRadius()));
     logger.info(postal+","+radius);

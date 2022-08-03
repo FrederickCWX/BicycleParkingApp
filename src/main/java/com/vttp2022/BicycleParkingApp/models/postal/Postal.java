@@ -77,10 +77,18 @@ public class Postal {
 
       if(ja != null){
         List<Results> results = new ArrayList<>();
+        /*
+        if(results.size() > 0){
+          JsonObject joValue = (JsonObject) ja.get(0);
+          results.add(Results.createJson(joValue));
+        }
+        */
+        
         for(Object jv: ja){
           JsonObject joValue = (JsonObject) jv;
           results.add(Results.createJson(joValue));
         }
+        
         logger.info("createJson value");
         Postal.results = results;
       }
