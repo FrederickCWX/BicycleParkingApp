@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vttp2022.BicycleParkingApp.models.User;
 import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
 import com.vttp2022.BicycleParkingApp.models.parking.Query;
 import com.vttp2022.BicycleParkingApp.models.parking.Value;
@@ -31,8 +34,14 @@ public class ParkingController {
   @Autowired
   private PostalAPIService postalSvc;
 
+  @Autowired
+  User usr;
+
   @GetMapping
-  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model){
+  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model, @ModelAttribute User user){
+
+    //User user = new User(usr.getUsername(), usr.getId());
+
     Query q = new Query();
     PostalQuery pq = new PostalQuery();
     pq.setPostalCode(Integer.parseInt(postal));
@@ -42,7 +51,7 @@ public class ParkingController {
 
     if(optPostal.isEmpty()){
       model.addAttribute("parkings", new Parkings());
-      return "BicycleParking";
+      return "BicycleParkingResults";
     }
     List<Results> results = Postal.getResults();
     if(results.size() >= 1){
@@ -54,7 +63,7 @@ public class ParkingController {
 
     if(optParking.isEmpty()){
       model.addAttribute("parkings", new Parkings());
-      return "BicycleParking";
+      return "BicycleParkingResults";
     }
     logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
 
@@ -63,6 +72,9 @@ public class ParkingController {
 
     String info = "There are "+value.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
     logger.info(info);
+    logger.info("parking get username");
+    logger.info(user.getUsername());
+    model.addAttribute("username", user.getUsername());
     model.addAttribute("respDetails", info);
     if(value.size() > 0){
       model.addAttribute("details", value);
@@ -72,6 +84,13 @@ public class ParkingController {
     model.addAttribute("Lng", q.getLng());
     model.addAttribute("Radius", q.getRadius());
 
+    return "BicycleParkingResults";
+  }
+
+  @GetMapping("/add/{valueId}")
+  public String addFavourite(@ModelAttribute User user, @ModelAttribute Value value, Model model, @PathVariable String valueId, @RequestParam String username){
+    logger.info("add favourite location : " + valueId);
+    logger.info("add favourite location : " + username);
     return "BicycleParking";
   }
 

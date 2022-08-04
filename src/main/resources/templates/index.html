@@ -15,37 +15,33 @@
 
 </head>
 <body>
+  
   <div class="container">
     <h1>Find Bicycle Parking</h1>
     <div class="row mt-5">
       <div class="col">
-        <form method="GET" action="BicycleParking">
+        <form
+        action="#"
+        th:action="@{/BicycleParking}"
+        th:object="${user}"
+        method="post"
+        >
           <div class="input-group">
-            <input th:object="${postal}"
+            <input
                 type="text" 
-                name="PostalCode" 
-                id="PostalCode" 
+                name="Username" 
+                id="Username" 
                 class="form-control" 
-                required placeholder="Enter postal code"
+                th:field="*{username}"
+                required placeholder="Enter username"
             >
-            <select  th:object="${parkings}" name="Dist" id="Dist">
-              <option value="0.5">Radius</option>
-              <option value="0.1">100m</option>
-              <option value="0.25">250m</option>
-              <option value="0.5">500m</option>
-              <option value="0.75">750m</option>
-              <!--
-              <option value="1.0">1km</option>
-              <option value="1.5">1.5km</option>
-              -->
-            </select>
             <button type="submit" class="btn btn-warning btn-lg">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
+  
   
 </body>
 </html>
