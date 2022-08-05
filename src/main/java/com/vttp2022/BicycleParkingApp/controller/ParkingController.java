@@ -38,7 +38,7 @@ public class ParkingController {
   User usr;
 
   @GetMapping
-  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model, @ModelAttribute User user){
+  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
 
     //User user = new User(usr.getUsername(), usr.getId());
 
@@ -67,31 +67,48 @@ public class ParkingController {
     }
     logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
 
-    List<Value> value = Parkings.getValue();
+    List<Value> val = Parkings.getValue();
     //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
 
-    String info = "There are "+value.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
+    String info = "There are "+val.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
     logger.info(info);
     logger.info("parking get username");
-    logger.info(user.getUsername());
-    model.addAttribute("username", user.getUsername());
+    logger.info(usr.getUsername());
+    logger.info(usr.getId());
+    model.addAttribute("username", usr.getUsername());
     model.addAttribute("respDetails", info);
-    if(value.size() > 0){
-      model.addAttribute("details", value);
+    if(val.size() > 0){
+      model.addAttribute("details", val);
     }
 
-    model.addAttribute("Lat", q.getLat());
-    model.addAttribute("Lng", q.getLng());
     model.addAttribute("Radius", q.getRadius());
 
     return "BicycleParkingResults";
   }
 
+  /*
   @GetMapping("/add/{valueId}")
-  public String addFavourite(@ModelAttribute User user, @ModelAttribute Value value, Model model, @PathVariable String valueId, @RequestParam String username){
+  public String addFavourite(/*@ModelAttribute User user, @ModelAttribute Value value, Model model, @PathVariable String valueId, @RequestParam String username){
+
     logger.info("add favourite location : " + valueId);
     logger.info("add favourite location : " + username);
-    return "BicycleParking";
-  }
 
+    List<Value> val = Parkings.getValue();
+    //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
+
+    //String info = "There are "+val.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
+    //logger.info(info);
+    logger.info("parking get username");
+    logger.info(usr.getUsername());
+    logger.info(usr.getId());
+    model.addAttribute("username", usr.getUsername());
+    //model.addAttribute("respDetails", info);
+    if(val.size() > 0){
+      model.addAttribute("details", val);
+    }
+
+    //model.addAttribute("Radius", q.getRadius());
+    return "BicycleParkingResults";
+  }
+  */
 }

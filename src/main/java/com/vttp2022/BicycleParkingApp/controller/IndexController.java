@@ -23,6 +23,9 @@ public class IndexController {
   @Autowired
   UserRedis redisSvc;
 
+  @Autowired
+  User usr;
+
   @GetMapping("/")
   public String login(Model model){
     //User user = new User();
@@ -32,11 +35,12 @@ public class IndexController {
   
   @PostMapping("/BicycleParking")
   public String showSearchPage(@ModelAttribute User user, Model model){
-    User u = new User(user.getUsername());
+    //User u = new User(user.getUsername());
+    usr.setUsername(user.getUsername());
     logger.info("index get username");
-    logger.info(u.getUsername());
-    redisSvc.save(user);
-    logger.info(u.getId());
+    logger.info(usr.getUsername());
+    //redisSvc.save(user);
+    logger.info(usr.getId());
 
     Parkings p = new Parkings();
     Query q = new Query();
@@ -44,7 +48,7 @@ public class IndexController {
     PostalQuery pq = new PostalQuery();
     pos.setPostalQuery(pq);
     p.setQuery(q);
-    model.addAttribute("user", u);
+    model.addAttribute("user", usr);
     model.addAttribute("postal", pos);
     model.addAttribute("parkings", p);
     return "BicycleParking";

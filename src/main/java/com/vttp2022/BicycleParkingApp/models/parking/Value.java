@@ -113,7 +113,12 @@ public class Value implements Serializable{
     JsonNumber jnCount = jo.getJsonNumber("RackCount");
     v.rackCount = jnCount.intValue();
     JsonString jsShelter = jo.getJsonString("ShelterIndicator");
-    v.shelter = jsShelter.getString();
+    if(jsShelter.getString().equals("Y"))
+      v.shelter = "Sheltered";
+    else if(jsShelter.getString().equals("N"))
+      v.shelter = "Unsheltered";
+    else 
+      v.shelter = jsShelter.getString();
     v.img = createImgURL(v.lat, v.lng);
     //logger.info(v.img);
     /*

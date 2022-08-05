@@ -1,3 +1,4 @@
+
 package com.vttp2022.BicycleParkingApp.controller;
 
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,8 @@ import org.slf4j.*;
 
 @Controller
 @RequestMapping("/BikeParking")
-public class FavouriteController {
-  private static final Logger logger = LoggerFactory.getLogger(FavouriteController.class);
+public class SearchController {
+  private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
   @GetMapping
   public String showSearchPage(Model model){
