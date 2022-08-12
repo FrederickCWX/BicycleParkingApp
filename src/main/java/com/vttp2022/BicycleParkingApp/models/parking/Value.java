@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.slf4j.*;
 
+import com.vttp2022.BicycleParkingApp.calculate.Distance;
+
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonString;
@@ -21,6 +23,8 @@ public class Value implements Serializable{
   private String rackType;
   private Integer rackCount;
   private String shelter;
+
+  private String distance;
 
   public Value(){
     this.id = generateId(8);
@@ -90,6 +94,14 @@ public class Value implements Serializable{
     this.shelter = shelter;
   }
 
+  public String getDistance(){
+    return distance;
+  }
+
+  public void setDistance(String distance){
+    this.distance = distance;
+  }
+
   private synchronized String generateId(int numchars) {
     Random r = new Random();
     StringBuilder strBuilder = new StringBuilder();
@@ -100,6 +112,9 @@ public class Value implements Serializable{
 }
 
   public static Value createJson(JsonObject jo){
+    //logger.info("Get query lat and long");
+    //logger.info(Query.getLat().toString());
+    //logger.info(Query.getLng().toString());
     //logger.info("createJson value");
     Value v = new Value();
     JsonString jsDesp = jo.getJsonString("Description");
@@ -120,6 +135,7 @@ public class Value implements Serializable{
     else 
       v.shelter = jsShelter.getString();
     v.img = createImgURL(v.lat, v.lng);
+    v.distance = Distance.getDistance(Query.getLat(), v.lat, Query.getLng(), v.lng);
     //logger.info(v.img);
     /*
     logger.info(

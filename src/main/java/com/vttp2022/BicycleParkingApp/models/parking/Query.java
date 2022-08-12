@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 
 public class Query {
 
-  private BigDecimal lat;
-  private BigDecimal lng;
+  private static BigDecimal lat;
+  private static BigDecimal lng;
   private double dist;
 
-  public BigDecimal getLat() {
+  public static BigDecimal getLat() {
     return lat;
   }
 
@@ -16,7 +16,7 @@ public class Query {
     this.lat = lat;
   }
 
-  public BigDecimal getLng() {
+  public static BigDecimal getLng() {
     return lng;
   }
 

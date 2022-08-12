@@ -1,3 +1,4 @@
+/* 
 package com.vttp2022.BicycleParkingApp.controller;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class ParkingController {
   User usr;
 
   @GetMapping
-  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
+  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user){
 
     //User user = new User(usr.getUsername(), usr.getId());
 
@@ -110,5 +111,6 @@ public class ParkingController {
     //model.addAttribute("Radius", q.getRadius());
     return "BicycleParkingResults";
   }
-  */
+  
 }
+*/

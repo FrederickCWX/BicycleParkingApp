@@ -52,12 +52,12 @@
                     <td><br/></td>
                 </tr>
                 <tr>
-                    <td><br/></td>
-                    <td><br/></td>
-                </tr>
-                <tr>
                     <td>Description: </td>
                     <td><span th:text="${detail.description}"></span></td>
+                </tr>
+                <tr>
+                    <td>Distance: </td>
+                    <td><span th:text="${detail.distance}"></span> metres</td>
                 </tr>
                 <tr>
                     <td>Rack Type: </td>
@@ -73,11 +73,15 @@
                 </tr>
                 <tr>
                     <td>
+                      <button th:attr="onclick=|upload('${value}')|" >Add to favourite</button>
+                      <!--
                       <a
                       th:href="@{/BikeParkingResults/add/{valueId}(valueId=${detail.id})} + '?username=' + *{username}"
                       class="text-blue-500 underline"
-                      ><button>Add to favourites</button></a
+                      ><button>Add to favourites</button>
+                      </a
                       >
+                      -->
                     </td>
                     <td><br/></td>
                 </tr>

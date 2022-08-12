@@ -17,6 +17,10 @@ public class User implements Serializable{
   private String id;
   private List<Value> data;
 
+  private int insertCount;
+  private int updateCount;
+  private boolean upsert;
+
   public User(){
     this.id = generateId(8);
   }
@@ -62,6 +66,30 @@ public class User implements Serializable{
 
   public void setData(List<Value> data) {
     this.data = data;
+  }
+
+  public int getInsertCount(){
+    return insertCount;
+  }
+
+  public void setInsertCount(int insertCount){
+    this.insertCount = insertCount;
+  }
+
+  public int getUpdateCount(){
+    return updateCount;
+  }
+
+  public void setUpdateCount(int updateCount){
+    this.updateCount = updateCount;
+  }
+
+  public boolean isUpsert(){
+    return upsert;
+  }
+
+  public void setUpsert(boolean upsert){
+    this.upsert = upsert;
   }
 
   
