@@ -78,8 +78,8 @@ public class IndexController {
     PostalQuery pq = new PostalQuery();
     pq.setPostalCode(Integer.parseInt(postal));
     pq.setReturnGeom("Y");
-    pq.setGetAddrDetails("N");
-    Optional<Postal> optPostal = postalSvc.findLatLong(pq);
+    pq.setGetAddrDetails("Y");
+    Optional<Postal> optPostal = postalSvc.getPostalDetails(pq);
 
     if(optPostal.isEmpty()){
       model.addAttribute("parkings", new Parkings());
@@ -102,7 +102,12 @@ public class IndexController {
     List<Value> val = Parkings.getValue();
     //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
 
-    String info = "There are "+val.size()+" bicycle parking bay(s) within "+((int) (q.getRadius()*1000))+" metres of Singapore "+pq.getPostalCode();
+    String info = "There are " + val.size()
+        +" bicycle parking bay(s) within "
+        +((int) (q.getRadius()*1000))
+        +" metres of "+ results.get(0).getBlkNumber()
+        +" "+results.get(0).getRoadName()
+        +" Singapore "+pq.getPostalCode();
     logger.info(info);
     logger.info("parking get username");
     logger.info(usr.getUsername());

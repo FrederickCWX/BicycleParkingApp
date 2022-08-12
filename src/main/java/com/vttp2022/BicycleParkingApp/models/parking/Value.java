@@ -2,11 +2,18 @@ package com.vttp2022.BicycleParkingApp.models.parking;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.slf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vttp2022.BicycleParkingApp.calculate.Distance;
+import com.vttp2022.BicycleParkingApp.models.postal.Postal;
+import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
+import com.vttp2022.BicycleParkingApp.models.postal.Results;
+import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
@@ -118,7 +125,8 @@ public class Value implements Serializable{
     //logger.info("createJson value");
     Value v = new Value();
     JsonString jsDesp = jo.getJsonString("Description");
-    v.description = jsDesp.getString();
+    v.description = cleanDescription(jsDesp.getString());
+    //v.description = jsDesp.getString();
     JsonNumber jnLat = jo.getJsonNumber("Latitude");
     v.lat = jnLat.bigDecimalValue();
     JsonNumber jnLng = jo.getJsonNumber("Longitude");
@@ -167,5 +175,51 @@ public class Value implements Serializable{
 
     return url;
   }
+
+  public static String cleanDescription(String sentence){
+    
+    if(sentence.contains("-")){
+      String[] postal = sentence.split("-");
+      int postalCode = Integer.valueOf(postal[0]);
+
+      PostalQuery pq = new PostalQuery();
+      pq.setPostalCode(postalCode);
+      pq.setReturnGeom("Y");
+      pq.setGetAddrDetails("Y");
+      Optional<Postal> optPostal = PostalAPIService.getPostalDetails(pq);
+
+      if(optPostal.isEmpty()){
+        sentence = postal[0]+"-"+postal[1];
+      }
+
+      List<Results> results = Postal.getResults();
+      if(results.size() >= 1){
+        StringBuilder sb = new StringBuilder();
+        sb.append(results.get(0).getBlkNumber());
+        sb.append(" ");
+        sb.append(results.get(0).getRoadName());
+        sb.append(" - Rack ");
+        sb.append(postal[1]);
+
+       sentence =  sb.toString();
+      }
+    }
+    
+
+
+    String wordList[] = sentence.split("\\s");  
+    String cleanDescription = "";  
+    for(String word: wordList){  
+        String firstLetter = word.substring(0,1);  
+        String nextLetters = word.substring(1);  
+        cleanDescription += firstLetter + nextLetters.toLowerCase() + " ";  
+    }
+
+    if(cleanDescription.contains("_yb")){
+      cleanDescription = cleanDescription.replace("_yb", " (Yellow Box)");
+    }
+
+    return cleanDescription.trim();  
+}  
   
 }

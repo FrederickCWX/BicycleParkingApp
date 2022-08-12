@@ -20,7 +20,7 @@ public class PostalAPIService {
 
   private static String URL = "https://developers.onemap.sg/commonapi/search";
 
-  public Optional<Postal> findLatLong(PostalQuery q){
+  public static Optional<Postal> getPostalDetails(PostalQuery q){
     //String apiKey = System.getenv("POSTAL_CODE_API_KEY");
     //String accept = "application/json";
 
