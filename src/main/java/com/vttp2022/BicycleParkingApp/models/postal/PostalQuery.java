@@ -9,7 +9,6 @@ public class PostalQuery {
   public Integer getPostalCode() {
     return postalCode;
   }
-
   public void setPostalCode(Integer postalCode) {
     this.postalCode = postalCode;
   }
@@ -17,7 +16,6 @@ public class PostalQuery {
   public String getReturnGeom() {
     return returnGeom;
   }
-
   public void setReturnGeom(String returnGeom) {
     this.returnGeom = returnGeom;
   }
@@ -25,7 +23,6 @@ public class PostalQuery {
   public String getGetAddrDetails() {
     return getAddrDetails;
   }
-  
   public void setGetAddrDetails(String getAddrDetails) {
     this.getAddrDetails = getAddrDetails;
   }

@@ -21,8 +21,6 @@ public class PostalAPIService {
   private static String URL = "https://developers.onemap.sg/commonapi/search";
 
   public static Optional<Postal> getPostalDetails(PostalQuery q){
-    //String apiKey = System.getenv("POSTAL_CODE_API_KEY");
-    //String accept = "application/json";
 
     String postalUrl = UriComponentsBuilder.fromUriString(URL)
       .queryParam("searchVal", q.getPostalCode())
@@ -35,12 +33,9 @@ public class PostalAPIService {
 
     try {
       HttpHeaders headers = new HttpHeaders();
-      //headers.set("AccountKey", apiKey);
-      //headers.set("accept", accept);
       HttpEntity request = new HttpEntity(headers);
 
       resp = template.exchange(postalUrl, HttpMethod.GET, request, String.class, 1);
-      //logger.info(resp.getBody());
       Postal p = Postal.createJson(resp.getBody());
       return Optional.of(p);
     } catch (Exception e) {

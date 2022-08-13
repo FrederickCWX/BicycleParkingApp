@@ -7,13 +7,13 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.slf4j.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.vttp2022.BicycleParkingApp.calculate.Distance;
 import com.vttp2022.BicycleParkingApp.models.postal.Postal;
 import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
 import com.vttp2022.BicycleParkingApp.models.postal.Results;
 import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
+import com.vttp2022.BicycleParkingApp.utilities.CalculateDistance;
+import com.vttp2022.BicycleParkingApp.utilities.CleanString;
 
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
@@ -40,7 +40,6 @@ public class Value implements Serializable{
   public String getId(){
     return id;
   }
-
   public void setId(String id){
     this.id = id;
   }
@@ -48,7 +47,6 @@ public class Value implements Serializable{
   public String getImg() {
     return img;
   }
-
   public void setImg(String img) {
     this.img = img;
   }
@@ -56,7 +54,6 @@ public class Value implements Serializable{
   public String getDescription() {
     return description;
   }
-
   public void setDescription(String description) {
     this.description = description;
   }
@@ -64,7 +61,6 @@ public class Value implements Serializable{
   public BigDecimal getLat() {
     return lat;
   }
-
   public void setLat(BigDecimal lat) {
     this.lat = lat;
   }
@@ -72,7 +68,6 @@ public class Value implements Serializable{
   public BigDecimal getLng() {
     return lng;
   }
-
   public void setLng(BigDecimal lng) {
     this.lng = lng;
   }
@@ -80,7 +75,6 @@ public class Value implements Serializable{
   public String getRackType() {
     return rackType;
   }
-
   public void setRackType(String rackType) {
     this.rackType = rackType;
   }
@@ -88,7 +82,6 @@ public class Value implements Serializable{
   public Integer getRackCount() {
     return rackCount;
   }
-
   public void setRackCount(Integer rackCount) {
     this.rackCount = rackCount;
   }
@@ -96,7 +89,6 @@ public class Value implements Serializable{
   public String getShelter() {
     return shelter;
   }
-
   public void setShelter(String shelter) {
     this.shelter = shelter;
   }
@@ -104,7 +96,6 @@ public class Value implements Serializable{
   public String getDistance(){
     return distance;
   }
-
   public void setDistance(String distance){
     this.distance = distance;
   }
@@ -119,20 +110,16 @@ public class Value implements Serializable{
 }
 
   public static Value createJson(JsonObject jo){
-    //logger.info("Get query lat and long");
-    //logger.info(Query.getLat().toString());
-    //logger.info(Query.getLng().toString());
-    //logger.info("createJson value");
     Value v = new Value();
+
     JsonString jsDesp = jo.getJsonString("Description");
-    v.description = cleanDescription(jsDesp.getString());
-    //v.description = jsDesp.getString();
+    v.description = CleanString.cleanString(jsDesp.getString());
     JsonNumber jnLat = jo.getJsonNumber("Latitude");
     v.lat = jnLat.bigDecimalValue();
     JsonNumber jnLng = jo.getJsonNumber("Longitude");
     v.lng = jnLng.bigDecimalValue();
     JsonString jsType = jo.getJsonString("RackType");
-    v.rackType = jsType.getString();
+    v.rackType = CleanString.cleanString(jsType.getString());
     JsonNumber jnCount = jo.getJsonNumber("RackCount");
     v.rackCount = jnCount.intValue();
     JsonString jsShelter = jo.getJsonString("ShelterIndicator");
@@ -143,18 +130,8 @@ public class Value implements Serializable{
     else 
       v.shelter = jsShelter.getString();
     v.img = createImgURL(v.lat, v.lng);
-    v.distance = Distance.getDistance(Query.getLat(), v.lat, Query.getLng(), v.lng);
-    //logger.info(v.img);
-    /*
-    logger.info(
-      "Description: "+v.description+"\n"+
-      "Latitude: "+v.lat+"\n"+
-      "Longitude: "+v.lng+"\n"+
-      "RackType: "+v.rackType+"\n"+
-      "RackCount: "+v.rackCount+"\n"+
-      "ShelterIndicator: "+v.shelter
-    );
-    */
+    v.distance = CalculateDistance.getDistance(Query.getLat(), v.lat, Query.getLng(), v.lng);
+
     return v;
   }
 
@@ -165,7 +142,6 @@ public class Value implements Serializable{
     sb.append(String.valueOf(lat));
     sb.append("&lng=");
     sb.append(String.valueOf(lng));
-    //sb.append("&zoom=17&height=350&width=350&polygons=&lines=&points=[");
     sb.append("&zoom=17&height=350&width=500&polygons=&lines=&points=[");
     sb.append(String.valueOf(lat));
     sb.append(",");
@@ -176,50 +152,6 @@ public class Value implements Serializable{
     return url;
   }
 
-  public static String cleanDescription(String sentence){
-    
-    if(sentence.contains("-")){
-      String[] postal = sentence.split("-");
-      int postalCode = Integer.valueOf(postal[0]);
-
-      PostalQuery pq = new PostalQuery();
-      pq.setPostalCode(postalCode);
-      pq.setReturnGeom("Y");
-      pq.setGetAddrDetails("Y");
-      Optional<Postal> optPostal = PostalAPIService.getPostalDetails(pq);
-
-      if(optPostal.isEmpty()){
-        sentence = postal[0]+"-"+postal[1];
-      }
-
-      List<Results> results = Postal.getResults();
-      if(results.size() >= 1){
-        StringBuilder sb = new StringBuilder();
-        sb.append(results.get(0).getBlkNumber());
-        sb.append(" ");
-        sb.append(results.get(0).getRoadName());
-        sb.append(" - Rack ");
-        sb.append(postal[1]);
-
-       sentence =  sb.toString();
-      }
-    }
-    
-
-
-    String wordList[] = sentence.split("\\s");  
-    String cleanDescription = "";  
-    for(String word: wordList){  
-        String firstLetter = word.substring(0,1);  
-        String nextLetters = word.substring(1);  
-        cleanDescription += firstLetter + nextLetters.toLowerCase() + " ";  
-    }
-
-    if(cleanDescription.contains("_yb")){
-      cleanDescription = cleanDescription.replace("_yb", " (Yellow Box)");
-    }
-
-    return cleanDescription.trim();  
-}  
+   
   
 }

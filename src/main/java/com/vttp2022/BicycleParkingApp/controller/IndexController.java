@@ -72,8 +72,6 @@ public class IndexController {
   @GetMapping("/BicycleParking")
   public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
 
-    //User user = new User(usr.getUsername(), usr.getId());
-
     Query q = new Query();
     PostalQuery pq = new PostalQuery();
     pq.setPostalCode(Integer.parseInt(postal));
@@ -81,7 +79,10 @@ public class IndexController {
     pq.setGetAddrDetails("Y");
     Optional<Postal> optPostal = postalSvc.getPostalDetails(pq);
 
-    if(optPostal.isEmpty()){
+    if(Postal.getFound() == 0){
+      String info = "Postal code invalid, please key in a valid postal code";
+      model.addAttribute("username", usr.getUsername());
+      model.addAttribute("respDetails", info);
       model.addAttribute("parkings", new Parkings());
       return "BicycleParkingResults";
     }
@@ -97,21 +98,22 @@ public class IndexController {
       model.addAttribute("parkings", new Parkings());
       return "BicycleParkingResults";
     }
-    logger.info("<<<<<"+q.getLat()+", "+q.getLng()+"****"+q.getRadius());
 
     List<Value> val = Parkings.getValue();
-    //logger.info("Number of bicycle bay(s): "+String.valueOf(response.size()));
 
-    String info = "There are " + val.size()
-        +" bicycle parking bay(s) within "
-        +((int) (q.getRadius()*1000))
-        +" metres of "+ results.get(0).getBlkNumber()
-        +" "+results.get(0).getRoadName()
-        +" Singapore "+pq.getPostalCode();
+    StringBuilder sb = new StringBuilder();
+    sb.append("There are ");
+    sb.append(val.size());
+    sb.append(" bicycle parking bay(s) within ");
+    sb.append((int) (q.getRadius()*1000));
+    sb.append(" metres of ");
+    sb.append(results.get(0).getAddress());
+    sb.append(", Singapore ");
+    sb.append(postal);
+    String info = sb.toString();
+
     logger.info(info);
-    logger.info("parking get username");
-    logger.info(usr.getUsername());
-    logger.info(usr.getId());
+
     model.addAttribute("username", usr.getUsername());
     model.addAttribute("respDetails", info);
     if(val.size() > 0){

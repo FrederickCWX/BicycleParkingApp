@@ -11,7 +11,6 @@ public class Query {
   public static BigDecimal getLat() {
     return lat;
   }
-
   public void setLat(BigDecimal lat) {
     this.lat = lat;
   }
@@ -19,7 +18,6 @@ public class Query {
   public static BigDecimal getLng() {
     return lng;
   }
-
   public void setLng(BigDecimal lng) {
     this.lng = lng;
   }
@@ -27,7 +25,6 @@ public class Query {
   public double getRadius() {
     return dist;
   }
-
   public void setRadius(double dist) {
     this.dist = dist;
   }

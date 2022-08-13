@@ -22,7 +22,6 @@ public class ParkingAPIService {
 
   public Optional<Parkings> findParking(Query q){
     String apiKey = System.getenv("BICYCLE_PARKING_API_KEY");
-    //String accept = "application/json";
 
     String parkingUrl = UriComponentsBuilder.fromUriString(URL)
       .queryParam("Lat", q.getLat())
@@ -36,11 +35,9 @@ public class ParkingAPIService {
     try {
       HttpHeaders headers = new HttpHeaders();
       headers.set("AccountKey", apiKey);
-      //headers.set("accept", accept);
       HttpEntity request = new HttpEntity(headers);
 
       resp = template.exchange(parkingUrl, HttpMethod.GET, request, String.class, 1);
-      //logger.info(resp.getBody());
       Parkings p = Parkings.createJson(resp.getBody());
       return Optional.of(p);
     } catch (Exception e) {

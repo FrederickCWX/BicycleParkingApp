@@ -1,11 +1,11 @@
-package com.vttp2022.BicycleParkingApp.calculate;
+package com.vttp2022.BicycleParkingApp.utilities;
 
 //import java.util.*;
 //import java.lang.*;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-public class Distance {
+public class CalculateDistance {
 
   private static final DecimalFormat df = new DecimalFormat("#.##");
 

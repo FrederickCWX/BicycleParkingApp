@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.slf4j.*;
 
+import com.vttp2022.BicycleParkingApp.utilities.CleanString;
+
 import jakarta.json.JsonObject;
 import jakarta.json.JsonString;
 
@@ -14,13 +16,11 @@ public class Results {
   private BigDecimal latitude;
   private BigDecimal longitude;
 
-  private String blkNumber;
-  private String roadName;
+  private String address;
 
   public String getSearchVal() {
     return searchVal;
   }
-
   public void setSearchVal(String searchVal) {
     this.searchVal = searchVal;
   }
@@ -28,7 +28,6 @@ public class Results {
   public BigDecimal getLatitude() {
     return latitude;
   }
-
   public void setLatitude(BigDecimal latitude) {
     this.latitude = latitude;
   }
@@ -36,29 +35,19 @@ public class Results {
   public BigDecimal getLongitude() {
     return longitude;
   }
-
   public void setLongitude(BigDecimal longitude) {
     this.longitude = longitude;
   }
 
-  public String getBlkNumber(){
-    return blkNumber;
+  public String getAddress(){
+    return address;
   }
-
-  public void setBlkNumber(String blkNumber){
-    this.blkNumber = blkNumber;
-  }
-
-  public String getRoadName(){
-    return roadName;
-  }
-
-  public void setRoadName(String roadName){
-    this.roadName = roadName;
+  public void setAddress(String address){
+    this.address = address;
   }
 
   public static Results createJson(JsonObject jo){
-    logger.info("createJson results");
+
     Results r = new Results();
     JsonString jsSearchVal = jo.getJsonString("SEARCHVAL");
     r.searchVal = jsSearchVal.getString();
@@ -67,23 +56,9 @@ public class Results {
     JsonString jsLongitude = jo.getJsonString("LONGITUDE");
     r.longitude = new BigDecimal(jsLongitude.getString());
     JsonString jsBlkNumber = jo.getJsonString("BLK_NO");
-    r.blkNumber = jsBlkNumber.getString();
     JsonString jsRoadName = jo.getJsonString("ROAD_NAME");
-    r.roadName = cleanRoadName(jsRoadName.getString());
+    r.address = jsBlkNumber.getString() + " " + CleanString.cleanString(jsRoadName.getString());
     return r;
   }
-
-  public static String cleanRoadName(String sentence){
-
-    String wordList[] = sentence.split("\\s");  
-    String cleanRoadName = "";  
-    for(String word: wordList){  
-        String firstLetter = word.substring(0,1);  
-        String nextLetters = word.substring(1);  
-        cleanRoadName += firstLetter + nextLetters.toLowerCase() + " ";  
-    }
-
-    return cleanRoadName.trim();  
-}
   
 }
