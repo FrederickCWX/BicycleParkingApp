@@ -127,6 +127,10 @@
 .main .row .col .table{
   padding-top: 2%;
 }
+h2{
+  padding-top: 15px;
+  text-align: center;
+}
 
 ::-webkit-input-placeholder{
   color: #9fa3b1;
