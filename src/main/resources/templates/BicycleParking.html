@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+  <link rel="stylesheet" type="text/css" href="../static/styles.css">
+  -->
+  <script src="https://kit.fontawesome.com/6368f28708.js" crossorigin="anonymous"></script>
   <title>Bicycle Parking</title>
+  <link th:href="@{/styles/bicycleParking.css}" rel="stylesheet" />
+  <!--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
     integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -12,23 +18,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" 
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    -->
 
 </head>
 <body>
-  <div class="container">
-    <h1>Find Bicycle Parking</h1>
-    <!-- <b>Welcome <span th:object="user" th:text="${username}">!</span></b> -->
-    <div class="row mt-5">
-      <div class="col">
+  <div class="main">
+    <div class="navbar">
+
+      <div class="icon">
+        <!--<h2 class="logo"></h2>-->
+        <img class="logo" th:src="@{/images/SGBP_Reg.png}">
+      </div>
+
+      <div class="menu">
+        <ul>
+          <!--<li><a href="#">HOME</a></li>-->
+          <li><a th:href="@{/BikeParking}">SEARCH</a></li>
+          <li><a th:href="@{/Favourite}">FAVOURITE</a></li>
+          <li><a th:href="@{/}">LOGOUT</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="search">
+      <div class="search_box">
         <form method="GET" action="BicycleParking">
-          <div class="input-group">
+          <select class="dropdown" th:object="${parkings}" name="Dist" id="Dist">
+            <option value="0.25">Radius</option>
+            <option value="0.1">100m</option>
+            <option value="0.2">200m</option>
+            <option value="0.25">250m</option>
+            <option value="0.3">300m</option>
+            <option value="0.4">400m</option>
+            <option value="0.5">500m</option>
+          </select>
+
+
+
+
+
+          <div class="search_field">
             <input th:object="${postal}"
                 type="text" 
                 name="PostalCode" 
                 id="PostalCode" 
-                class="form-control" 
-                required placeholder="Enter postal code"
+                class="input" 
+                placeholder="Enter postal code"
             >
+            <button type="submit"><i class="fas fa-solid fa-magnifying-glass"></i></button>
+            <!--
+            <i class="fas fa-solid fa-magnifying-glass"></i>
+            
             <select  th:object="${parkings}" name="Dist" id="Dist">
               <option value="0.25">Radius</option>
               <option value="0.1">100m</option>
@@ -37,13 +77,9 @@
               <option value="0.3">300m</option>
               <option value="0.4">400m</option>
               <option value="0.5">500m</option>
-              <!--
-              <option value="0.75">750m</option>
-              <option value="1.0">1km</option>
-              <option value="1.5">1.5km</option>
-              -->
             </select>
             <button type="submit" class="btn btn-warning btn-lg">Submit</button>
+            -->
             
           </div>
         </form>

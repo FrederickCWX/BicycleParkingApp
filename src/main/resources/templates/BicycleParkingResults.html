@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bicycle Parking</title>
+    <link th:href="@{/styles/bicycleParking.css}" rel="stylesheet" />
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
     integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -12,122 +14,140 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" 
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    -->
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1>Bicycle Parking</h1>
-            <!---->
-            <b>Hi <span th:text="${username}"></span></b><br>
-            <b><span th:text="${respDetails}"></span></b><br>
-            <br>
-            <!---->
-            <b><a
-              th:href="@{/BikeParking}"
-              class="text-blue-500 underline"
-              ><button>Back</button></a
-              >
-            </b>
-            <b><a
-              th:href="@{/}"
-              class="text-blue-500 underline"
-              ><button>Logout</button></a
-              >
-            </b>
-            <br><br><br>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table th:each="detail : *{details}">
-                <tr>
-                    <td rowspan="8"><img th:src= "${detail.img}" width=500 height=350/></td>
-                    <td rowspan="8">&nbsp</td>
-                    <td rowspan="8">&nbsp</td>
-                    <td rowspan="8">&nbsp</td>
-                    <td rowspan="8">&nbsp</td>
-                    
-                    <td><br/></td>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td>Description: </td>
-                    <td><span th:text="${detail.description}"></span></td>
-                </tr>
-                <tr>
-                    <td>Distance: </td>
-                    <td><span th:text="${detail.distance}"></span> metres</td>
-                </tr>
-                <tr>
-                    <td>Rack Type: </td>
-                    <td><span th:text="${detail.rackType}"></span></td>
-                </tr>
-                <tr>
-                    <td>Rack Count: </td>
-                    <td><span th:text="${detail.rackCount}"></span></td>
-                </tr>
-                <tr>
-                    <td>Sheltered bay: </td>
-                    <td><span th:text="${detail.shelter}"></span></td>
-                </tr>
-                <tr>
-                    <td>
-                      <button th:attr="onclick=|upload('${value}')|" >Add to favourite</button>
-                      <!--
-                      <a
-                      th:href="@{/BikeParkingResults/add/{valueId}(valueId=${detail.id})} + '?username=' + *{username}"
-                      class="text-blue-500 underline"
-                      ><button>Add to favourites</button>
-                      </a
-                      >
-                      -->
-                    </td>
-                    <td><br/></td>
-                </tr>
-                <tr>
-                    <td><br/></td>
-                    <td><br/></td>
-                </tr>
-            </table>
-            <!--
-            <table th:each="detail : *{details}">
-                <tr>
-                    <td colspan="2"><img th:src= "${detail.img}" width=500 height=350/></td>
-                </tr>
-                <tr>
-                    <td>Description: </td>
-                    <td><span th:text="${detail.description}"></span></td>
-                </tr>
-                <tr>
-                    <td>Rack Type: </td>
-                    <td><span th:text="${detail.rackType}"></span></td>
-                </tr>
-                <tr>
-                    <td>Rack Count: </td>
-                    <td><span th:text="${detail.rackCount}"></span></td>
-                </tr>
-                <tr>
-                    <td>Sheltered bay: </td>
-                    <td><span th:text="${detail.shelter}"></span></td>
-                </tr>
-              </table>
-            -->
-            <!--
-            <ul
-                role="list"
-                class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                th:each="detail : *{details}"
-            >
-                <img th:src= "${detail.img}" width=500 height=350/>
-                <li>Description: <span th:text="${detail.description}"></span></li>
-                <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
-                <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
-                <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>
+    <div class="main">
+        <div class="navbar">
+
+            <div class="icon">
+            <!--<h2 class="logo"></h2>-->
+            <img class="logo" th:src="@{/images/SGBP_Reg.png}">
+            </div>
+    
+            <div class="menu">
+            <ul>
+                <!--<li><a href="#">HOME</a></li>-->
+                <li><a th:href="@{/BikeParking}">SEARCH</a></li>
+                <li><a th:href="@{/Favourite}">FAVOURITE</a></li>
+                <li><a th:href="@{/}">LOGOUT</a></li>
             </ul>
-            -->
+            </div>
         </div>
+        <!--
+        <div class="row">
+            <div class="col">
+                <h1>Bicycle Parking</h1>
+                <b>Hi <span th:text="${username}"></span></b><br>
+                <b><span th:text="${respDetails}"></span></b><br>
+                <br>
+                <b><a
+                th:href="@{/BikeParking}"
+                class="text-blue-500 underline"
+                ><button>Back</button></a
+                >
+                </b>
+                <b><a
+                th:href="@{/}"
+                class="text-blue-500 underline"
+                ><button>Logout</button></a
+                >
+                </b>
+                <br><br><br>
+            </div>
+        </div>
+        -->
+        <div class="row">
+            <div class="col">
+                <table th:each="detail : *{details}">
+                    <tr>
+                        <td rowspan="8"><img th:src= "${detail.img}" width=500 height=350/></td>
+                        <td rowspan="8">&nbsp</td>
+                        <td rowspan="8">&nbsp</td>
+                        <td rowspan="8">&nbsp</td>
+                        <td rowspan="8">&nbsp</td>
+                        
+                        <td><br/></td>
+                        <td><br/></td>
+                    </tr>
+                    <tr>
+                        <td>Description: </td>
+                        <td><span th:text="${detail.description}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Distance: </td>
+                        <td><span th:text="${detail.distance}"></span> metres</td>
+                    </tr>
+                    <tr>
+                        <td>Rack Type: </td>
+                        <td><span th:text="${detail.rackType}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Rack Count: </td>
+                        <td><span th:text="${detail.rackCount}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Sheltered bay: </td>
+                        <td><span th:text="${detail.shelter}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <button th:attr="onclick=|upload('${value}')|" >Add to favourite</button>
+                          <!--
+                          <a
+                          th:href="@{/BikeParkingResults/add/{valueId}(valueId=${detail.id})} + '?username=' + *{username}"
+                          class="text-blue-500 underline"
+                          ><button>Add to favourites</button>
+                          </a
+                          >
+                          -->
+                        </td>
+                        <td><br/></td>
+                    </tr>
+                    <tr>
+                        <td><br/></td>
+                        <td><br/></td>
+                    </tr>
+                </table>
+                <!--
+                <table th:each="detail : *{details}">
+                    <tr>
+                        <td colspan="2"><img th:src= "${detail.img}" width=500 height=350/></td>
+                    </tr>
+                    <tr>
+                        <td>Description: </td>
+                        <td><span th:text="${detail.description}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Rack Type: </td>
+                        <td><span th:text="${detail.rackType}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Rack Count: </td>
+                        <td><span th:text="${detail.rackCount}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Sheltered bay: </td>
+                        <td><span th:text="${detail.shelter}"></span></td>
+                    </tr>
+                  </table>
+                -->
+                <!--
+                <ul
+                    role="list"
+                    class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                    th:each="detail : *{details}"
+                >
+                    <img th:src= "${detail.img}" width=500 height=350/>
+                    <li>Description: <span th:text="${detail.description}"></span></li>
+                    <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
+                    <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
+                    <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>
+                </ul>
+                -->
+            </div>
+        </div>
+    
     </div>
-</div>
 </body>
 </html>
