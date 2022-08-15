@@ -20,6 +20,10 @@
   height: 97vh;
   background: #A63B4D;
 }
+.box_1 .image{
+  display: block;
+  text-align: center;
+}
 
 .box_2{
   width: calc( 55% + 40px );
@@ -31,8 +35,8 @@
 }
 h1{
   font-size: 40px;
-  width: 450px;
-  padding-left: 90px;
+  width: auto;
+  text-align: center;
 }
 p{
   padding-top: 30px;
@@ -58,16 +62,19 @@ button[type="submit"]{
   font-size: 16px;
 }
 .logo{
+  max-height: 500px;
   padding-top: 150px;
-  padding-left: 100px;
-  text-align: center;
-  display: block;
-  top: -250px;
-  height: 500px;
+  height: 10%;
+  width: auto;
 }
 .gif{
+  /*
   padding-top: 30px;
   padding-left: 25px;
+  */
+  display: block;
+  padding-left: 10px;
+  text-align: center;
   width: 70px;
   height: auto;
 }
