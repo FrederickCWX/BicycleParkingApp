@@ -3,9 +3,71 @@
   margin: 0;
   padding: 0;
   font-family: 'Quicksand', sans-serif;
-  font-style: light;
   line-height: 1.15;
   letter-spacing: -.02em;
-  color: rgba(0, 0, 0, 0.8);
   -webkit-font-smoothing: antialiased;
+  
+}
+.wraper{
+  width: 100%;
+  height: 100vh;
+  background: #A63B4D;
+  display: flex;
+}
+
+.box_1{
+  width: calc( 45% - 40px) ;
+  height: 97vh;
+  background: #A63B4D;
+}
+
+.box_2{
+  width: calc( 55% + 40px );
+  height: 100vh;
+  background: white;
+  border-left: 200px solid #A63B4D;
+  border-bottom: 100vh solid transparent;
+  box-sizing: border-box;
+}
+h1{
+  font-size: 40px;
+  width: 450px;
+  padding-left: 90px;
+}
+p{
+  padding-top: 30px;
+  font-style: light;
+  font-size: 30px;
+}
+.form{
+  padding-top: 20px;
+  width: 100%;
+}
+input[type="text"]{
+  font-size:24px;
+}
+button[type="submit"]{
+  font-size: 24px;
+}
+
+.content{
+  padding-top: 200px;
+  text-align: center;
+  display: block;
+  color: black;
+  font-size: 16px;
+}
+.logo{
+  padding-top: 150px;
+  padding-left: 100px;
+  text-align: center;
+  display: block;
+  top: -250px;
+  height: 500px;
+}
+.gif{
+  padding-top: 30px;
+  padding-left: 25px;
+  width: 70px;
+  height: auto;
 }
