@@ -19,7 +19,9 @@ import com.vttp2022.BicycleParkingApp.models.postal.Results;
 import com.vttp2022.BicycleParkingApp.services.ParkingAPIService;
 import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 import com.vttp2022.BicycleParkingApp.services.UserRedis;
+import com.vttp2022.BicycleParkingApp.utilities.SortByDistance;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +101,7 @@ public class IndexController {
       return "BicycleParkingResults";
     }
 
+    Collections.sort(Parkings.getValue(), new SortByDistance());
     List<Value> val = Parkings.getValue();
 
     StringBuilder sb = new StringBuilder();

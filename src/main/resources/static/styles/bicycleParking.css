@@ -10,14 +10,21 @@
   -webkit-font-smoothing: antialiased;
   
 }
+body{
+  background: url('../images/Cycling.gif') repeat-y 100% 100% fixed;
+  background-position: center;
+  width:100%;
+  height:auto;
+}
 .main{
   padding-top: 2%;
+  /*
   width: 100%;
   background-color: #bfbfbf;
   background-position: center;
   background-size: 100% 100%;
   height: 96.5vh;
-  
+  */
 }
 .navbar{
   width: 95%;
@@ -70,9 +77,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.help h2{
+  text-align: center;
+  padding-top: 90px;
+}
 .search .search_box{
   width: 750px;
+  /*
   background: #fff;
+  */
+  background: rgba(255, 255, 255, 0.95);
   height: 70px;
   border-radius: 5px;
   display: flex;
@@ -81,6 +95,7 @@
   border-radius: 20px;
 }
 .search .search_box .dropdown{
+  background: rgba(255,255,255,0);
   left: 40px;
   width: 200px;
   height: 70px;
@@ -88,7 +103,7 @@
   color: black;
   position: relative;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 25px;
 }
 .search .search_box .search_field{
   padding-left: 90px;
@@ -98,13 +113,14 @@
   float: right;
 }
 .search .search_box .search_field .input{
+  background: rgba(255,255,255,0);
   width: 100%;
   height: 100%;
   border: 0;
-  font-size: 18px;
+  font-size: 25px;
   padding-left: 20px;
   padding-right: 38px;
-  color: #6f768d;
+  color: black;
 }
 .search .search_box .search_field .fas{
   position: absolute;
@@ -113,33 +129,4 @@
   font-size: 22px;
   color: #A63B4D;
   cursor: pointer;
-}
-.main .row{
-  padding-top: 2%;
-  padding-left: 15%;
-  width: 100%;
-  background-color: #bfbfbf;
-  background-position: center;
-  background-size: 100% 100%;
-  height: auto;
-  
-}
-.main .row .col .table{
-  padding-top: 2%;
-}
-h2{
-  padding-top: 15px;
-  text-align: center;
-}
-
-::-webkit-input-placeholder{
-  color: #9fa3b1;
-}
-
-::-moz-input-placeholder{
-  color: #9fa3b1;
-}
-
-::-ms-input-placeholder{
-  color: #9fa3b1;
 }
