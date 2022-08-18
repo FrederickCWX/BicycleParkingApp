@@ -34,124 +34,65 @@
             </ul>
             </div>
         </div>
-        <div class="info">
-            <h2><span th:text="${respDetails}"></span></h2>
-        </div>
-        <!--
-        <div class="row">
-            <div class="col">
-                <h1>Bicycle Parking</h1>
-                <b>Hi <span th:text="${username}"></span></b><br>
-                <b><span th:text="${respDetails}"></span></b><br>
-                <br>
-                <b><a
-                th:href="@{/BikeParking}"
-                class="text-blue-500 underline"
-                ><button>Back</button></a
-                >
-                </b>
-                <b><a
-                th:href="@{/}"
-                class="text-blue-500 underline"
-                ><button>Logout</button></a
-                >
-                </b>
-                <br><br><br>
+        <div class="response">
+            <div class="info">
+                <h2><span th:text="${respDetails}"></span></h2>
             </div>
-        </div>
-        -->
-        <div class="row">
-            <div class="col">
-                <table th:each="detail : *{details}">
-                    <div class="table">
-                        <tr>
-                            <td rowspan="8"><img th:src= "${detail.img}" width=500 height=350/></td>
-                            <td rowspan="8">&nbsp</td>
-                            <td rowspan="8">&nbsp</td>
-                            <td rowspan="8">&nbsp</td>
-                            <td rowspan="8">&nbsp</td>
+            <div class="row">
+                <div class="col">
+                    <table th:each="detail : *{details}">
+                        <div class="table">
+                            <tr>
+                                <td rowspan="8"><img th:src= "${detail.img}" width=500 height=350/></td>
+                                
+                                <td rowspan="8">&nbsp</td>
+                                <td rowspan="8">&nbsp</td>
+                                <td rowspan="8">&nbsp</td>
+                                <td rowspan="8">&nbsp</td>
+                                
+                                <td><br/></td>
+                                <td><br/></td>
+                                
+                            </tr>
+                            <tr>
+                                <td>Description: </td>
+                                <td><span th:text="${detail.description}"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Distance: </td>
+                                <td><span th:text="${detail.distance}"></span> metres</td>
+                            </tr>
+                            <tr>
+                                <td>Rack Type: </td>
+                                <td><span th:text="${detail.rackType}"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Rack Count: </td>
+                                <td><span th:text="${detail.rackCount}"></span></td>
+                            </tr>
+                            <tr>
+                                <td>Sheltered bay: &nbsp</td>
+                                <td><span th:text="${detail.shelter}"></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                  <button th:attr="onclick=|upload('${value}')|" >Add to favourite</button>
+                                </td>
+                                <td><br/></td>
+                            </tr>
                             
-                            <td><br/></td>
-                            <td><br/></td>
-                        </tr>
-                        <tr>
-                            <td>Description: </td>
-                            <td><span th:text="${detail.description}"></span></td>
-                        </tr>
-                        <tr>
-                            <td>Distance: </td>
-                            <td><span th:text="${detail.distance}"></span> metres</td>
-                        </tr>
-                        <tr>
-                            <td>Rack Type: </td>
-                            <td><span th:text="${detail.rackType}"></span></td>
-                        </tr>
-                        <tr>
-                            <td>Rack Count: </td>
-                            <td><span th:text="${detail.rackCount}"></span></td>
-                        </tr>
-                        <tr>
-                            <td>Sheltered bay: &nbsp</td>
-                            <td><span th:text="${detail.shelter}"></span></td>
-                        </tr>
-                        <tr>
-                            <td>
-                              <button th:attr="onclick=|upload('${value}')|" >Add to favourite</button>
-                              <!--
-                              <a
-                              th:href="@{/BikeParkingResults/add/{valueId}(valueId=${detail.id})} + '?username=' + *{username}"
-                              class="text-blue-500 underline"
-                              ><button>Add to favourites</button>
-                              </a
-                              >
-                              -->
-                            </td>
-                            <td><br/></td>
-                        </tr>
-                        <tr>
-                            <td><br/></td>
-                            <td><br/></td>
-                        </tr>
-                    </div>
-                </table>
-                <!--
-                <table th:each="detail : *{details}">
-                    <tr>
-                        <td colspan="2"><img th:src= "${detail.img}" width=500 height=350/></td>
-                    </tr>
-                    <tr>
-                        <td>Description: </td>
-                        <td><span th:text="${detail.description}"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Rack Type: </td>
-                        <td><span th:text="${detail.rackType}"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Rack Count: </td>
-                        <td><span th:text="${detail.rackCount}"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Sheltered bay: </td>
-                        <td><span th:text="${detail.shelter}"></span></td>
-                    </tr>
-                  </table>
-                -->
-                <!--
-                <ul
-                    role="list"
-                    class="w-48 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    th:each="detail : *{details}"
-                >
-                    <img th:src= "${detail.img}" width=500 height=350/>
-                    <li>Description: <span th:text="${detail.description}"></span></li>
-                    <li>Rack Type: <span th:text="${detail.rackType}"></span></li>
-                    <li>Rack Count: <span th:text="${detail.rackCount}"></span></li>
-                    <li>Sheltered bay: <span th:text="${detail.shelter}"></span></li>
-                </ul>
-                -->
+                            <tr>
+                                <td><br/></td>
+                                <td><br/></td>
+                            </tr>
+                            
+                        </div>
+                    </table>
+                </div>
             </div>
+
         </div>
+        
     
     </div>
 </body>

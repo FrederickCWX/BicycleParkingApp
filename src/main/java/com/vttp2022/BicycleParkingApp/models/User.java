@@ -16,6 +16,7 @@ public class User implements Serializable{
   private String username;
   private String id;
   private List<Value> data;
+  //private int found = data.size();
 
   private int insertCount;
   private int updateCount;
@@ -34,6 +35,12 @@ public class User implements Serializable{
     this.id = id;
     this.username = username;
   }
+
+  /*
+  public int getFound(){
+    return found;
+  }
+  */
 
   private synchronized String generateId(int numchars){
     Random r = new Random();

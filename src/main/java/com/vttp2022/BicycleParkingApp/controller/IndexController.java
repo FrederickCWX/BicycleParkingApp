@@ -40,8 +40,10 @@ public class IndexController {
   @Autowired
   private PostalAPIService postalSvc;
 
+  /*
   @Autowired
   User usr;
+  */
 
   @GetMapping("/")
   public String login(Model model){
@@ -53,11 +55,13 @@ public class IndexController {
   @PostMapping("/BicycleParking")
   public String showSearchPage(@ModelAttribute User user, Model model){
     //User u = new User(user.getUsername());
+    /*
     usr.setUsername(user.getUsername());
     logger.info("index get username");
     logger.info(usr.getUsername());
     //redisSvc.save(user);
     logger.info(usr.getId());
+    */
 
     Parkings p = new Parkings();
     Query q = new Query();
@@ -65,7 +69,7 @@ public class IndexController {
     PostalQuery pq = new PostalQuery();
     pos.setPostalQuery(pq);
     p.setQuery(q);
-    model.addAttribute("user", usr);
+    //model.addAttribute("user", usr);
     model.addAttribute("postal", pos);
     model.addAttribute("parkings", p);
     return "BicycleParking";
@@ -83,7 +87,7 @@ public class IndexController {
 
     if(Postal.getFound() == 0){
       String info = "Postal code invalid, please key in a valid postal code";
-      model.addAttribute("username", usr.getUsername());
+      //model.addAttribute("username", usr.getUsername());
       model.addAttribute("respDetails", info);
       model.addAttribute("parkings", new Parkings());
       return "BicycleParkingResults";
@@ -117,7 +121,7 @@ public class IndexController {
 
     logger.info(info);
 
-    model.addAttribute("username", usr.getUsername());
+    //model.addAttribute("username", usr.getUsername());
     model.addAttribute("respDetails", info);
     if(val.size() > 0){
       model.addAttribute("details", val);

@@ -11,8 +11,10 @@
   
 }
 body{
-  background: url('../images/Cycling.gif') repeat-y 100% 100% fixed;
-  background-position: center;
+  background: url('../images/BP200.gif') 100% 100% fixed;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
   width:100%;
   height:auto;
 }
@@ -77,11 +79,11 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.help h2{
+.guide h2{
   text-align: center;
   padding-top: 90px;
 }
-.search .search_box{
+.search .form{
   width: 750px;
   /*
   background: #fff;
@@ -94,7 +96,7 @@ body{
   box-shadow: 0 8px 6px -10px #b3c6ff;
   border-radius: 20px;
 }
-.search .search_box .dropdown{
+.search .form .dropdown{
   background: rgba(255,255,255,0);
   left: 40px;
   width: 200px;
@@ -105,14 +107,14 @@ body{
   cursor: pointer;
   font-size: 25px;
 }
-.search .search_box .search_field{
+.search .form .search_field{
   padding-left: 90px;
   width: 350px;
   height: 100%;
   position: relative;
   float: right;
 }
-.search .search_box .search_field .input{
+.search .form .search_field .input{
   background: rgba(255,255,255,0);
   width: 100%;
   height: 100%;
@@ -122,7 +124,7 @@ body{
   padding-right: 38px;
   color: black;
 }
-.search .search_box .search_field .fas{
+.search .form .search_field .fas{
   position: absolute;
   top: 25px;
   right: -50px;

@@ -39,40 +39,14 @@
         </ul>
       </div>
     </div>
-    <div class="help">
-      <h2>Enter your target destination Postal Code</h2>
-    </div>
-
-    <div class="search">
-      <div class="search_box">
-        <form method="GET" action="BicycleParking">
-          <select class="dropdown" th:object="${parkings}" name="Dist" id="Dist">
-            <option value="0.25">Radius</option>
-            <option value="0.1">100m</option>
-            <option value="0.2">200m</option>
-            <option value="0.25">250m</option>
-            <option value="0.3">300m</option>
-            <option value="0.4">400m</option>
-            <option value="0.5">500m</option>
-          </select>
-
-
-
-
-
-          <div class="search_field">
-            <input th:object="${postal}"
-                type="text" 
-                name="PostalCode" 
-                id="PostalCode" 
-                class="input" 
-                placeholder="Enter postal code"
-            >
-            <button type="submit"><i class="fas fa-solid fa-magnifying-glass"></i></button>
-            <!--
-            <i class="fas fa-solid fa-magnifying-glass"></i>
-            
-            <select  th:object="${parkings}" name="Dist" id="Dist">
+    <div class="search_box">
+      <div class="guide">
+        <h2>Enter your target destination Postal Code</h2>
+      </div>
+      <div class="search">
+        <div class="form">
+          <form method="GET" action="BicycleParking">
+            <select class="dropdown" th:object="${parkings}" name="Dist" id="Dist">
               <option value="0.25">Radius</option>
               <option value="0.1">100m</option>
               <option value="0.2">200m</option>
@@ -81,13 +55,24 @@
               <option value="0.4">400m</option>
               <option value="0.5">500m</option>
             </select>
-            <button type="submit" class="btn btn-warning btn-lg">Submit</button>
-            -->
-            
-          </div>
-        </form>
+            <div class="search_field">
+              <input th:object="${postal}"
+                  type="text" 
+                  name="PostalCode" 
+                  id="PostalCode" 
+                  class="input" 
+                  placeholder="Enter postal code"
+              >
+              <button type="submit"><i class="fas fa-solid fa-magnifying-glass"></i></button>
+            </div>
+          </form>
+        </div>
       </div>
+
     </div>
+    
+
+    
   </div>
 
   

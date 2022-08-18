@@ -19,10 +19,26 @@
   width: calc( 45% - 40px) ;
   height: 97vh;
   background: #A63B4D;
+  background-repeat: no-repeat;
+  background-image: url("../images/BPMain.png");
+  background-size: 80% auto;
+  background-position: center;
 }
 .box_1 .image{
+  padding-top: 20%;
   display: block;
   text-align: center;
+}
+.logo{
+  height: auto;
+  max-width: 500px;
+
+  /*
+  max-height: 20%;
+  padding-top: 150px;
+  height: 750px;
+  width: auto;
+  */
 }
 
 .box_2{
@@ -55,26 +71,38 @@ button[type="submit"]{
 }
 
 .content{
-  padding-top: 200px;
+  padding-top: 30%;
   text-align: center;
   display: block;
   color: black;
   font-size: 16px;
+  padding-bottom: 25%;
 }
-.logo{
-  max-height: 500px;
-  padding-top: 150px;
-  height: 10%;
-  width: auto;
+.gif_box{
+  padding-top: 50%;
+  width: 100%;
+  height: 40vh;
+  background: transparent;
+  box-sizing: border-box;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-image: url("../images/index.gif");
+  background-size: 60% auto;
+  background-position: center;
 }
+/*
 .gif{
-  /*
+  
   padding-top: 30px;
   padding-left: 25px;
-  */
+  
   display: block;
   padding-left: 10px;
   text-align: center;
-  width: 70px;
+}
+.gif .index_gif{
+  padding-top: 10%;
+  width: 500px;
   height: auto;
 }
+*/
