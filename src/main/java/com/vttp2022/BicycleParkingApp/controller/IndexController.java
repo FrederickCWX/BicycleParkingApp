@@ -131,5 +131,10 @@ public class IndexController {
 
     return "BicycleParkingResults";
   }
+
+  @GetMapping("/Favourite")
+  public String showFavourites(Model model){
+    return "Favourite";
+  }
   
 }
