@@ -12,10 +12,10 @@
       <div class="row">
         <div class="col-sm-4 box_1"></div> 
         <div class="col-sm-8 box_2">
-          <div class="mx-auto" style="padding-top: 20%;">
+          <div class="mx-auto position" style="padding-top: 20%;">
             <h1 class="text-center">Locate the nearest Bicycle Parking Bay</h1>
             <h2 class="text-center">Login to begin</h2>
-            <form 
+            <form
             action="#"
             th:action="@{/search}"
             th:object="${user}"
@@ -27,7 +27,10 @@
                 type="text" 
                 th:field="*{username}"
                 placeholder="Enter username" 
-                aria-label=".form-control-lg username">
+                aria-label=".form-control-lg username"
+                oninvalid="this.setCustomValidity('Please enter a username')"
+                oninput="setCustomValidity('')"
+                required>
               </div>
               <div class="row justify-content-center">
                 <button 

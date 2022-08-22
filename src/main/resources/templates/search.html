@@ -63,7 +63,9 @@
               id="PostalCode"
               placeholder="Enter postal code" 
               aria-label=".form-control-lg search"
-              >
+              oninvalid="this.setCustomValidity('Please enter a postal code')"
+              oninput="setCustomValidity('')"
+              required>
               <button type="submit" class="btn btn-secondary fs-4" style="width: 5%;">Search</button>
             </form>
           </div>
