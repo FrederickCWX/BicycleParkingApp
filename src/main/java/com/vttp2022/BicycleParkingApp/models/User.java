@@ -16,7 +16,7 @@ public class User implements Serializable{
   private String username;
   private String id;
   private List<Value> data;
-  //private int found = data.size();
+  private int found;
 
   private int insertCount;
   private int updateCount;
@@ -24,23 +24,37 @@ public class User implements Serializable{
 
   public User(){
     this.id = generateId(8);
+    this.found = getFound();
   }
 
   public User(String username){
     this.id = generateId(8);
     this.username = username;
+    this.found = getFound();
   }
   
   public User(String username, String id){
     this.id = id;
     this.username = username;
+    this.found = getFound();
   }
 
-  /*
+  public User(String username, String id, List<Value> data){
+    this.id = id;
+    this.username = username;
+    this.data = data;
+    this.found = getFound();
+  }
+  
   public int getFound(){
+
+    if(data == null)
+      found = 0;
+    else
+      found = data.size();
     return found;
   }
-  */
+
 
   private synchronized String generateId(int numchars){
     Random r = new Random();

@@ -27,7 +27,7 @@ public class PostalAPIService {
       .queryParam("returnGeom", q.getReturnGeom())
       .queryParam("getAddrDetails", q.getGetAddrDetails())
       .toUriString();
-    logger.info(postalUrl);
+    //logger.info(postalUrl);
     RestTemplate template = new RestTemplate();
     ResponseEntity<String> resp = null;
 

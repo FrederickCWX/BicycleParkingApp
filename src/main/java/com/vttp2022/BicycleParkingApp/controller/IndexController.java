@@ -52,7 +52,7 @@ public class IndexController {
     return "index";
   }
   
-  @PostMapping("/BicycleParking")
+  @PostMapping("/search")
   public String showSearchPage(@ModelAttribute User user, Model model){
     //User u = new User(user.getUsername());
     /*
@@ -72,10 +72,15 @@ public class IndexController {
     //model.addAttribute("user", usr);
     model.addAttribute("postal", pos);
     model.addAttribute("parkings", p);
-    return "BicycleParking";
+    return "search";
   }
 
-  @GetMapping("/BicycleParking")
+  @GetMapping("/Search")
+  public String showSearch(Model model){
+    return "search";
+  }
+
+  @GetMapping("/search")
   public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
 
     Query q = new Query();
@@ -90,8 +95,9 @@ public class IndexController {
       //model.addAttribute("username", usr.getUsername());
       model.addAttribute("respDetails", info);
       model.addAttribute("parkings", new Parkings());
-      return "BicycleParkingResults";
+      return "result";
     }
+
     List<Results> results = Postal.getResults();
     if(results.size() >= 1){
       q.setLat(results.get(0).getLatitude());
@@ -102,7 +108,7 @@ public class IndexController {
 
     if(optParking.isEmpty()){
       model.addAttribute("parkings", new Parkings());
-      return "BicycleParkingResults";
+      return "result";
     }
 
     Collections.sort(Parkings.getValue(), new SortByDistance());
@@ -129,12 +135,14 @@ public class IndexController {
 
     model.addAttribute("Radius", q.getRadius());
 
-    return "BicycleParkingResults";
+    return "result";
   }
 
-  @GetMapping("/Favourite")
+  @GetMapping("/favourite")
   public String showFavourites(Model model){
-    return "Favourite";
+    return "favourite";
   }
+
+  
   
 }

@@ -65,7 +65,7 @@ public class Postal {
         }
         Postal.results = results;
       }
-      logger.info("Postal Json response read");
+      //logger.info("Postal Json response read");
     }
     return p;
   }

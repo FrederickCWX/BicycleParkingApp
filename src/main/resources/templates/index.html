@@ -1,88 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bicycle Parking</title>
-  <link th:href="@{/styles/index.css}" rel="stylesheet" />
-  <!--
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
-    integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" 
-    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  -->
-
-</head>
-<body>
-  <div class="wraper">
-    <div class="box_1">
-      <!--
-      <div class="image">
-        <img class="logo" th:src="@{/images/BPMain.png}">
-      </div>
-    -->
-    </div>
-    <div class="box_2">
-      <div class="content">
-        <h1>Locate the nearest Bicycle Parking Bay</h1>
-        <p>Login to begin</p>
-        <div class="form">
-          <form
-          action="#"
-          th:action="@{/BicycleParking}"
-          th:object="${user}"
-          method="post"
-          >
-            <input 
-              type="text" 
-              name="Username" 
-              id="Username"   
-              class="input" 
-              th:field="*{username}"
-              placeholder="Enter username"
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bicycle Parking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 box_1"></div> 
+        <div class="col-sm-8 box_2">
+          <div class="mx-auto" style="padding-top: 20%;">
+            <h1 class="text-center">Locate the nearest Bicycle Parking Bay</h1>
+            <h2 class="text-center">Login to begin</h2>
+            <form 
+            action="#"
+            th:action="@{/search}"
+            th:object="${user}"
+            method="post"
             >
-            <button type="submit" class="button" action="/BicycleParking.html">Login</button>
-          </form>
-        </div>
-        <div class="gif_box">
-          <!--
-          <img class="index_gif" th:src="@{/images/index.gif}">
-          -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--
-  <div class="container">
-    <h1>Find Bicycle Parking</h1>
-    <div class="row mt-5">
-      <div class="col">
-        <form
-        action="#"
-        th:action="@{/BicycleParking}"
-        th:object="${user}"
-        method="post"
-        >
-          <div class="input-group">
-            <input
+              <div class="row justify-content-center pt-3">
+                <input 
+                class="form-control form-control-lg w-75 fs-3" 
                 type="text" 
-                name="Username" 
-                id="Username" 
-                class="form-control" 
                 th:field="*{username}"
-                required placeholder="Enter username"
-            >
-            <button type="submit" class="btn btn-warning btn-lg">Login</button>
+                placeholder="Enter username" 
+                aria-label=".form-control-lg username">
+              </div>
+              <div class="row justify-content-center">
+                <button 
+                type="submit" 
+                class="btn btn-secondary w-25 fs-4" 
+                style="margin-top: 10px;"
+                >Login</button>
+              </div>
+            </form>
+            <div class="row justify-content-center gif"
+            style="background-image: url('../images/index.gif');">
+            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-  -->
-  
-</body>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+  </body>
 </html>

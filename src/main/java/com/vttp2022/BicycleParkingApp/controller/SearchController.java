@@ -1,4 +1,4 @@
-
+/*
 package com.vttp2022.BicycleParkingApp.controller;
 
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
 import org.slf4j.*;
 
 @Controller
-@RequestMapping("/BikeParking")
+@RequestMapping("/Search")
 public class SearchController {
   private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -28,7 +28,8 @@ public class SearchController {
     p.setQuery(q);
     model.addAttribute("postal", pos);
     model.addAttribute("parkings", p);
-    return "BicycleParking";
+    return "search";
   }
   
 }
+*/
