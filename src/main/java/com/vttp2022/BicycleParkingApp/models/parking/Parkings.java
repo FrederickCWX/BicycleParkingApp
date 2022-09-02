@@ -21,6 +21,8 @@ public class Parkings {
 
   private Query query;
 
+  private static String info;
+
   public String getMetadata(){
     return metadata;
   }
@@ -40,6 +42,13 @@ public class Parkings {
   }
   public void setQuery(Query query){
     this.query = query;
+  }
+
+  public static String getInfo(){
+    return info;
+  }
+  public static void setInfo(String stringInfo){
+    info = stringInfo;
   }
 
   public static Parkings createJson(String json) throws IOException{

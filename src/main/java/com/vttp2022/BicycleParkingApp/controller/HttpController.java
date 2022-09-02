@@ -5,11 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vttp2022.BicycleParkingApp.models.User;
+//import com.vttp2022.BicycleParkingApp.models.UserOld;
 import com.vttp2022.BicycleParkingApp.models.parking.Parkings;
 import com.vttp2022.BicycleParkingApp.models.parking.Query;
 import com.vttp2022.BicycleParkingApp.models.parking.Value;
@@ -21,6 +22,7 @@ import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 import com.vttp2022.BicycleParkingApp.services.UserRedis;
 import com.vttp2022.BicycleParkingApp.utilities.SortByDistance;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +30,8 @@ import java.util.Optional;
 import org.slf4j.*;
 
 @Controller
-public class IndexController {
-  private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+public class HttpController {
+  private static final Logger logger = LoggerFactory.getLogger(HttpController.class);
 
   @Autowired
   UserRedis redisSvc;
@@ -40,20 +42,21 @@ public class IndexController {
   @Autowired
   private PostalAPIService postalSvc;
 
-  /*
+  /* 
   @Autowired
   User usr;
   */
 
   @GetMapping("/")
-  public String login(Model model){
-    //User user = new User();
-    model.addAttribute("user", new User());
+  public String loginPage(Model model){
+    //UserOld user = new UserOld();
+    User user = new User();
+    model.addAttribute("user", user);
     return "index";
   }
   
   @PostMapping("/search")
-  public String showSearchPage(@ModelAttribute User user, Model model){
+  public String showSearchPage(@RequestParam(value = "Username", required = true) String username, Model model){
     //User u = new User(user.getUsername());
     /*
     usr.setUsername(user.getUsername());
@@ -62,6 +65,15 @@ public class IndexController {
     //redisSvc.save(user);
     logger.info(usr.getId());
     */
+    /* 
+    UserOld user = new UserOld(username);
+    logger.info(username);
+    //redisSvc.save(user);
+    logger.info(user.getId());
+    */
+    User user = new User(username);
+    //redisSvc.save(user);
+    logger.info(username);
 
     Parkings p = new Parkings();
     Query q = new Query();
@@ -76,12 +88,12 @@ public class IndexController {
   }
 
   @GetMapping("/Search")
-  public String showSearch(Model model){
+  public String showSearchPage(Model model){
     return "search";
   }
 
   @GetMapping("/search")
-  public String parking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
+  public String searchParking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model/*, @ModelAttribute User user*/){
 
     Query q = new Query();
     PostalQuery pq = new PostalQuery();
@@ -123,12 +135,13 @@ public class IndexController {
     sb.append(results.get(0).getAddress());
     sb.append(", Singapore ");
     sb.append(postal);
-    String info = sb.toString();
+    //String info = sb.toString();
+    Parkings.setInfo(sb.toString());
 
-    logger.info(info);
+    logger.info(Parkings.getInfo());
 
     //model.addAttribute("username", usr.getUsername());
-    model.addAttribute("respDetails", info);
+    model.addAttribute("respDetails", Parkings.getInfo());
     if(val.size() > 0){
       model.addAttribute("details", val);
     }
@@ -137,6 +150,53 @@ public class IndexController {
 
     return "result";
   }
+
+  @GetMapping("/result/add/{detailId}")
+  public String saveParking(@ModelAttribute Value value, Model model, @PathVariable String detailId){
+    logger.info("Add to favourite: "+detailId);
+
+    List<Value> val = Parkings.getValue();
+    List<Value> test = User.getFavourites();
+
+    for(Value individual: val){
+      if(individual.getId().equals(detailId)){
+        boolean found = false;
+        while(found == false){
+          for(int i=0; i<User.getFavFound(); i++){
+            if(test.get(i).getDescription().equals(individual.getDescription())){
+              logger.info("exist in fav");
+              found = true;
+              break;
+            }
+          }
+          break;
+        }
+        if(found == false){
+          User.addFavourite(individual);
+        }
+        logger.info(String.valueOf(User.getFavFound()));
+        for(int x=0; x<User.getFavFound(); x++){
+          logger.info(test.get(x).getDescription());
+        }
+      }
+    }
+    
+    //User.setData(test);
+    logger.info(User.getFavourites().get(0).getDescription());
+    User u = new User(User.getUsername(), User.getFavourites());
+    //redisSvc.update(u);
+    
+
+    model.addAttribute("respDetails", Parkings.getInfo());
+    if(val.size() > 0){
+      model.addAttribute("details", val);
+    }
+    return "result";
+  }
+
+
+
+
 
   @GetMapping("/favourite")
   public String showFavourites(Model model){

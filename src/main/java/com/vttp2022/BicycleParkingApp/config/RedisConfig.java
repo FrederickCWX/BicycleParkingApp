@@ -12,6 +12,7 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+//import com.vttp2022.BicycleParkingApp.models.UserOld;
 import com.vttp2022.BicycleParkingApp.models.User;
 
 import java.util.Optional;
@@ -34,7 +35,7 @@ public class RedisConfig {
   @Scope("singleton")
   public RedisTemplate<String, User> redisTemplate(){
     final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
-    config.setHostName(redisHost);
+    config.setHostName(redisHost); 
     config.setPort(redisPort.get());
     config.setPassword(redisPassword);
 
@@ -43,7 +44,7 @@ public class RedisConfig {
     jedisFac.afterPropertiesSet();
     logger.info("redis host port > {redisHost} {redisPort}", redisHost, redisPort);
 
-    RedisTemplate<String, User> template = new RedisTemplate();
+    RedisTemplate<String, User> template = new RedisTemplate<>();
     template.setConnectionFactory(jedisFac);
     template.setKeySerializer(new StringRedisSerializer());
 
@@ -54,5 +55,40 @@ public class RedisConfig {
     
     return template;
   }
+
+  /*
+   * @Value("${spring.redis.host}")
+  private String redisHost;
+
+  @Value("${spring.redis.port}")
+  private Optional<Integer> redisPort;
+
+  private String redisPassword = System.getenv("BIKE_PARKING_REDIS_PASSWORD");
+
+  @Bean
+  @Scope("singleton")
+  public RedisTemplate<String, UserOld> redisTemplate(){
+    final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+    config.setHostName(redisHost); 
+    config.setPort(redisPort.get());
+    config.setPassword(redisPassword);
+
+    final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
+    final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
+    jedisFac.afterPropertiesSet();
+    logger.info("redis host port > {redisHost} {redisPort}", redisHost, redisPort);
+
+    RedisTemplate<String, UserOld> template = new RedisTemplate<>();
+    template.setConnectionFactory(jedisFac);
+    template.setKeySerializer(new StringRedisSerializer());
+
+    RedisSerializer<Object> serializer = new JdkSerializationRedisSerializer(getClass().getClassLoader());
+    template.setValueSerializer(
+        serializer
+    );
+    
+    return template;
+  }
+   */
   
 }

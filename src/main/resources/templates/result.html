@@ -40,17 +40,17 @@
       <div class="row bg-white" style="height: 140px;"></div>
       <div class="row">
         <div class="mx-auto" style="margin-top: 2%;">
-          <h2 class="text-center fw-bold"><span th:text="${respDetails}"></span></h2>
+          <h3 class="text-center fw-bold"><span th:text="${respDetails}"></span></h3>
         </div>
       </div>
       <div class="row justify-content-center d-flex align-items-center">
-        <div class="card mb-3 text-center bg-transparent" style="max-width: 75vw; height: 350px; border: none; margin-top: 2%;">
-          <div class="row pt-3" th:each="detail : *{details}">
-            <div class="col-md-6 my-auto">
-              <img th:src= "${detail.img}" class="img-fluid rounded">
+        <div class="card mb-3 text-center bg-transparent" style="width: 85vw; height: 350px; border: none; margin-top: 2%;">
+          <div class="row pt-auto" th:each="detail : *{details}" style="margin-top: 30px;">
+            <div class="col-md-6">
+              <img th:src= "${detail.img}" class="img-fluid rounded" style="height: 350px; width: 500px">
             </div>
-            <div class="col-md-6 d-flex align-items-center" style="border-radius: 20px; background-color: rgba(248, 249, 250, 0.8); width: auto; min-width: 25vw; max-width: 50vw;">
-              <div class="card-body px-0 py-auto">
+            <div class="col-md-6 d-flex align-items-center" style="border-radius: 20px; background-color: rgba(248, 249, 250, 0.8); width: auto; min-width: 600px; max-width: 45vw;">
+              <div class="card-body px-0">
                 <table class="table table-responsive table-borderless my-0 mx-auto fs-5 text-start" style="width: auto; height: auto;">
                   <tbody>
                     <tr>
@@ -74,8 +74,28 @@
                       <td><span th:text="${detail.shelter}"></span></td>
                     </tr>
                     <tr>
+                      <th class="col-md-3">ID: </th>
+                      <td><span th:text="${detail.id}"></span></td>
+                    </tr>
+                    <tr>
                       <td class="col-md-3" colspan="2">
+                        <!--
+                        <form 
+                        method="POST" 
+                        action="#"
+                        th:object="${detail}"
+                        name="saveDetail"
+                        id="saveDetail"
+                        >
+                          <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
+                        </form>
+                        -->
+                        <!--
                         <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
+                        -->
+                        <a th:href="@{/result/add/{detailId}(detailId=${detail.id})}">  
+                          <button class="btn btn-secondary fs-5">Add to favourite</button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>

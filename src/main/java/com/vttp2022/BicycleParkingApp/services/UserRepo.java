@@ -1,12 +1,25 @@
 package com.vttp2022.BicycleParkingApp.services;
 
+//import com.vttp2022.BicycleParkingApp.models.UserOld;
 import com.vttp2022.BicycleParkingApp.models.User;
 
 public interface UserRepo {
   public int save(final User user);
 
-  public User findById(final String userId);
+  //public UserOld findById(final String userId);
 
-  //public int update(final User user);
+  public User findByUsername(final String username);
+
+  public int update(final User user);
+
+  /*
+   * public int save(final UserOld user);
+
+  public UserOld findById(final String userId);
+
+  public UserOld findByUsername(final String username);
+
+  public int update(final UserOld user);
+   */
   
 }

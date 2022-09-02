@@ -38,14 +38,14 @@
           <div class="mx-auto">
             <h2 class="text-center fw-bold">Enter your destination Postal Code</h2>
           </div>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center my-auto">
             <form class="row justify-content-center" method="GET" action="search">
               <select 
               class="form-select fs-4" 
               th:object="${parkings}" 
               name="Dist"
               id="Dist"
-              style="width: 10%; "
+              style="width: 10vw; min-width: 125px;"
               >
                 <option selected value="0.25">Radius</option>
                 <option value="0.1">100m</option>
@@ -65,8 +65,8 @@
               aria-label=".form-control-lg search"
               oninvalid="this.setCustomValidity('Please enter a postal code')"
               oninput="setCustomValidity('')"
-              required>
-              <button type="submit" class="btn btn-secondary fs-4" style="width: 5%;">Search</button>
+              required style="min-width: 450px;">
+              <button type="submit" class="btn btn-secondary fs-4" style="width: 100px;">Search</button>
             </form>
           </div>
         </div>

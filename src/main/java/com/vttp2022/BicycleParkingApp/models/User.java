@@ -1,117 +1,123 @@
 package com.vttp2022.BicycleParkingApp.models;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Random;
-
-import org.slf4j.*;
 import org.springframework.stereotype.Component;
 
 import com.vttp2022.BicycleParkingApp.models.parking.Value;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.*;
+
 @Component(value = "user")
-public class User implements Serializable{
+public class User {
   private static final Logger logger = LoggerFactory.getLogger(User.class);
 
-  private String username;
-  private String id;
-  private List<Value> data;
-  private int found;
+  private static String username;
+  private static List<Value> favourites;
+  private static int favFound;
 
   private int insertCount;
   private int updateCount;
   private boolean upsert;
 
   public User(){
-    this.id = generateId(8);
-    this.found = getFound();
+    logger.info("new user");
+    this.favourites = new ArrayList<>();
+    this.favFound = 0;
   }
 
   public User(String username){
-    this.id = generateId(8);
+    logger.info("new user > "+username);
     this.username = username;
-    this.found = getFound();
+    this.favourites = new ArrayList<>();
+    this.favFound = 0;
   }
-  
-  public User(String username, String id){
-    this.id = id;
+
+  public User(String username, List<Value> favourites){
     this.username = username;
-    this.found = getFound();
+    this.favourites = favourites;
+    this.favFound = favourites.size();
   }
 
-  public User(String username, String id, List<Value> data){
-    this.id = id;
-    this.username = username;
-    this.data = data;
-    this.found = getFound();
-  }
-  
-  public int getFound(){
-
-    if(data == null)
-      found = 0;
-    else
-      found = data.size();
-    return found;
-  }
-
-
-  private synchronized String generateId(int numchars){
-    Random r = new Random();
-    StringBuilder sb = new StringBuilder();
-    while(sb.length() < numchars){
-      sb.append(Integer.toHexString(r.nextInt()));
+  public static boolean addFavourite(Value value){
+    boolean found = false;
+    for(Value favourite: favourites){
+      if(favourite.getDescription().equals(value.getDescription()))
+        found = true;
     }
-    return sb.toString().substring(0, numchars);
+    if(found == false){
+      favourites.add(value);
+      favFound++;
+      return true;
+    }else
+      return false;
   }
 
-  public String getUsername() {
+  public static boolean removeFavourite(Value value){
+    boolean found = false;
+    for(int x=0; x < favourites.size(); x++){
+      if(favourites.get(x).getDescription().equals(value.getDescription())){
+        found = true;
+        favourites.remove(x);
+        favFound--;
+      }
+    }
+    if(found == true)
+      return true;
+    else
+      return false;
+  }
+
+
+
+  public static String getUsername() {
     return username;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public static void setUsername(String username) {
+    User.username = username;
   }
 
-  public String getId() {
-    return id;
+  public static List<Value> getFavourites() {
+    return favourites;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public static void setFavourites(List<Value> favourites) {
+    User.favourites = favourites;
   }
 
-  public List<Value> getData() {
-    return data;
+  public static int getFavFound() {
+    return favFound;
   }
 
-  public void setData(List<Value> data) {
-    this.data = data;
+  public static void setFavFound(int favFound) {
+    User.favFound = favFound;
   }
 
-  public int getInsertCount(){
+  
+  public int getInsertCount() {
     return insertCount;
   }
 
-  public void setInsertCount(int insertCount){
+  public void setInsertCount(int insertCount) {
     this.insertCount = insertCount;
   }
 
-  public int getUpdateCount(){
+  public int getUpdateCount() {
     return updateCount;
   }
 
-  public void setUpdateCount(int updateCount){
+  public void setUpdateCount(int updateCount) {
     this.updateCount = updateCount;
   }
 
-  public boolean isUpsert(){
+  public boolean isUpsert() {
     return upsert;
   }
 
-  public void setUpsert(boolean upsert){
+  public void setUpsert(boolean upsert) {
     this.upsert = upsert;
   }
-
   
 }
