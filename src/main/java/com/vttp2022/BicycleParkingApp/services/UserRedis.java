@@ -3,6 +3,7 @@ package com.vttp2022.BicycleParkingApp.services;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.*;
@@ -49,10 +50,20 @@ public class UserRedis implements UserRepo{
   */
 
   @Override
-  public User findByUsername(final String username){
-    logger.info("Find user by username > "+username);
-    User result = (User) redisTemplate.opsForValue().get(username);
+  public Optional<User> findByUsername(final String username){
+    logger.info("Find user by username > " + username);
+    /*
+    Optional<User> result = (User) redisTemplate.opsForValue().get(username);
     return result;
+    */
+    try{
+      User result = (User) redisTemplate.opsForValue().get(username);
+      return Optional.of(result);
+    }catch(Exception e){
+      logger.error(e.getMessage());
+      e.printStackTrace();
+    }
+    return Optional.empty();
   }
 
   @Override

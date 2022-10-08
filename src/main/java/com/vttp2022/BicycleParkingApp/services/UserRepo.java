@@ -1,5 +1,7 @@
 package com.vttp2022.BicycleParkingApp.services;
 
+import java.util.Optional;
+
 //import com.vttp2022.BicycleParkingApp.models.UserOld;
 import com.vttp2022.BicycleParkingApp.models.User;
 
@@ -8,7 +10,7 @@ public interface UserRepo {
 
   //public UserOld findById(final String userId);
 
-  public User findByUsername(final String username);
+  public Optional<User> findByUsername(final String username);
 
   public int update(final User user);
 

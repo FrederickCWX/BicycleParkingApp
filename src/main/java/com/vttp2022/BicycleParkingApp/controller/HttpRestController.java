@@ -1,5 +1,7 @@
 package com.vttp2022.BicycleParkingApp.controller;
 
+import java.util.Optional;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -48,10 +50,16 @@ public class HttpRestController {
   */
 
   @GetMapping(path = "/username={username}")
-  public ResponseEntity<User> getUserByUsername(@PathVariable String username){
-    User u = redisSvc.findByUsername(username);
-    logger.info(String.valueOf(u.getFavFound()));
+  public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username){
+    
+    Optional<User> u = redisSvc.findByUsername(username);
+    //logger.info("FavFound > " + String.valueOf(u.getFavFound()));
+    if(u.isPresent())
+      logger.info("User found");
+    else
+      logger.info("User not found");
     return ResponseEntity.ok(u);
+
   }
 
 

@@ -4,13 +4,14 @@ import org.springframework.stereotype.Component;
 
 import com.vttp2022.BicycleParkingApp.models.parking.Value;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.*;
 
 @Component(value = "user")
-public class User {
+public class User implements Serializable{
   private static final Logger logger = LoggerFactory.getLogger(User.class);
 
   private static String username;

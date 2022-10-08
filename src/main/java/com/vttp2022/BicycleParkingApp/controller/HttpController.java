@@ -71,9 +71,25 @@ public class HttpController {
     //redisSvc.save(user);
     logger.info(user.getId());
     */
+    /*
     User user = new User(username);
-    //redisSvc.save(user);
+    redisSvc.save(user);
     logger.info(username);
+    */
+
+    Optional<User> u = redisSvc.findByUsername(username);
+    if(u.isPresent()){
+      //TODO
+      //Load user json data
+    }else{
+      User user = new User(username);
+      redisSvc.save(user);
+      logger.info("New user > " + username);
+    }
+
+
+
+
 
     Parkings p = new Parkings();
     Query q = new Query();
