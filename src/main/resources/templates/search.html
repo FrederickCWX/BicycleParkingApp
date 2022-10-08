@@ -12,7 +12,7 @@
     <div class="behind container-fluid">
       <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light justify-content-between" style="background-color: #A63B4D; margin-top: 2%; width: 95%; height: 120px; margin-left: auto; margin-right: auto; border-radius: 20px;">
-          <a class="navbar-brand" th:href="@{/Search}">
+          <a class="navbar-brand" th:href="@{/search}">
             <img th:src="@{/images/SGBP_Reg.png}" height="100px" style="padding-left: 30px;">
           </a>
           <button class="navbar-toggler pr-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-3 fw-bold" style="padding-right: 2%;">
               <li class="nav-item active">
-                <a class="nav-link" th:href="@{/Search}">SEARCH</a>
+                <a class="nav-link" th:href="@{/search}">SEARCH</a>
               </li>
               <li class="nav-item px-4">
                 <a class="nav-link" style="padding-left: 10px;" th:href="@{/favourite}">FAVOURITE</a>
@@ -39,7 +39,12 @@
             <h2 class="text-center fw-bold">Enter your destination Postal Code</h2>
           </div>
           <div class="row justify-content-center my-auto">
-            <form class="row justify-content-center" method="GET" action="search">
+            <form 
+            class="row justify-content-center" 
+            method="GET" 
+            action="#"
+            th:action="@{/result}"
+            >
               <select 
               class="form-select fs-4" 
               th:object="${parkings}" 

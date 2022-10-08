@@ -2,7 +2,7 @@ package com.vttp2022.BicycleParkingApp.models.postal;
 
 import java.math.BigDecimal;
 
-import org.slf4j.*;
+//import org.slf4j.*;
 
 import com.vttp2022.BicycleParkingApp.utilities.CleanString;
 
@@ -10,7 +10,7 @@ import jakarta.json.JsonObject;
 import jakarta.json.JsonString;
 
 public class Results {
-  private static final Logger logger = LoggerFactory.getLogger(Results.class);
+  //private static final Logger logger = LoggerFactory.getLogger(Results.class);
 
   private String searchVal;
   private BigDecimal latitude;

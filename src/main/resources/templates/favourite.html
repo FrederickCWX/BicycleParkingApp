@@ -12,7 +12,7 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-between" style="background-color: #A63B4D; margin-top: 2%; width: 95%; height: 120px; margin-left: auto; margin-right: auto; border-radius: 20px;">
-          <a class="navbar-brand" th:href="@{/Search}">
+          <a class="navbar-brand" th:href="@{/search}">
             <img th:src="@{/images/SGBP_Reg.png}" height="100px" style="padding-left: 30px;">
           </a>
   
@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-3 fw-bold" style="padding-right: 2%;">
               <li class="nav-item active">
-                <a class="nav-link" th:href="@{/Search}">SEARCH</a>
+                <a class="nav-link" th:href="@{/search}">SEARCH</a>
               </li>
               <li class="nav-item px-4">
                 <a class="nav-link" style="padding-left: 10px;" th:href="@{/favourite}">FAVOURITE</a>
@@ -35,16 +35,86 @@
         </nav>
       </div>
 
-      
-    <div class="container-fluid">
-      <div class="row">
-        <div class="mx-auto" style="margin-top: 10%;">
-          <h2 class="text-center fw-bold">This function is currently unavailable</h2>
+      <div class="container-fluid">
+        <div class="row bg-white" style="height: 140px;"></div>
+        <div class="row">
+          <div class="mx-auto" style="margin-top: 2%;">
+            <h3 class="text-center fw-bold"><span th:text="${info}"></span></h3>
+          </div>
+        </div>
+        <div class="row justify-content-center d-flex align-items-center">
+          <div class="card mb-3 text-center bg-transparent" style="width: 85vw; height: 350px; border: none; margin-top: 2%;">
+            <div class="row pt-auto" th:each="detail : *{details}" style="margin-top: 30px;">
+              <div class="col-md-6">
+                <img th:src= "${detail.img}" class="img-fluid rounded" style="height: 350px; width: 500px">
+              </div>
+              <div class="col-md-6 d-flex align-items-center" style="border-radius: 20px; background-color: rgba(248, 249, 250, 0.8); width: auto; min-width: 600px; max-width: 45vw;">
+                <div class="card-body px-0">
+                  <table class="table table-responsive table-borderless my-0 mx-auto fs-5 text-start" style="width: auto; height: auto;">
+                    <tbody>
+                      <tr>
+                        <th class="col-md-3">Description: </th>
+                        <td><span th:text="${detail.description}"></span></td>
+                      </tr>
+                      <!--
+                      <tr>
+                        <th class="col-md-3">Distance: </th>
+                        <td><span th:text="${detail.distance}"></span> metres</td>
+                      </tr>
+                    -->
+                      <tr>
+                        <th class="col-md-3">Rack Type: </th>
+                        <td><span th:text="${detail.rackType}"></span></td>
+                      </tr>
+                      <tr>
+                        <th class="col-md-3">Rack Count: </th>
+                        <td><span th:text="${detail.rackCount}"></span></td>
+                      </tr>
+                      <tr>
+                        <th class="col-md-3">Sheltered bay: </th>
+                        <td><span th:text="${detail.shelter}"></span></td>
+                      </tr>
+                      <!--
+                      <tr>
+                        <th class="col-md-3">ID: </th>
+                        <td><span th:text="${detail.id}"></span></td>
+                      </tr>
+                    -->
+                      <tr>
+                        <td class="col-md-3" colspan="2">
+  
+                          
+                          <form method="POST" action="/removeParking">
+                            <input type="hidden" name="id" data-th-value="${detail.id}">
+                            <button type="submit" class="btn btn-secondary fs-5">Remove from favourite</button>
+                          </form>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <img th:src="@{/images/ComingSoonP5.gif}" class="rounded mx-auto d-block" style="height: 40vh; width:auto;">
+
+      
+
+      <!--
+      <div class="container-fluid">
+        <div class="row">
+          <div class="mx-auto" style="margin-top: 10%;">
+            <h2 class="text-center fw-bold">This function is currently unavailable</h2>
+          </div>
+        </div>
+        <div class="row">
+          <img th:src="@{/images/ComingSoonP5.gif}" class="rounded mx-auto d-block" style="height: 40vh; width:auto;">
+        </div>
       </div>
+      -->
+
+
     </div>
 
 

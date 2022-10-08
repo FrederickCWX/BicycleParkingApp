@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vttp2022.BicycleParkingApp.models.postal.Postal;
-import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
 
 @Service
 public class PostalAPIService {
@@ -20,14 +19,15 @@ public class PostalAPIService {
 
   private static String URL = "https://developers.onemap.sg/commonapi/search";
 
-  public static Optional<Postal> getPostalDetails(PostalQuery q){
+  //public static Optional<Postal> getPostalDetails(PostalQuery q){
+  public static Optional<Postal> getPostalDetails(int postal){
 
     String postalUrl = UriComponentsBuilder.fromUriString(URL)
-      .queryParam("searchVal", q.getPostalCode())
-      .queryParam("returnGeom", q.getReturnGeom())
-      .queryParam("getAddrDetails", q.getGetAddrDetails())
+      .queryParam("searchVal", postal)
+      .queryParam("returnGeom", "Y")
+      .queryParam("getAddrDetails", "Y")
       .toUriString();
-    //logger.info(postalUrl);
+      
     RestTemplate template = new RestTemplate();
     ResponseEntity<String> resp = null;
 

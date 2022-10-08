@@ -20,8 +20,6 @@ public class Postal {
   private static int found;
   private static List<Results> results = new ArrayList<>();
 
-  private PostalQuery postalQuery;
-
   public static int getFound() {
     return found;
   }
@@ -34,13 +32,6 @@ public class Postal {
   }
   public static void setResults(List<Results> results) {
     Postal.results = results;
-  }
-
-  public PostalQuery getPostalQuery() {
-    return postalQuery;
-  }
-  public void setPostalQuery(PostalQuery postalQuery) {
-    this.postalQuery = postalQuery;
   }
 
   public static Postal createJson(String json) throws IOException{
@@ -65,7 +56,6 @@ public class Postal {
         }
         Postal.results = results;
       }
-      //logger.info("Postal Json response read");
     }
     return p;
   }

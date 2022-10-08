@@ -4,116 +4,59 @@ import java.util.Optional;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vttp2022.BicycleParkingApp.models.User;
-//import com.vttp2022.BicycleParkingApp.models.UserOld;
-import com.vttp2022.BicycleParkingApp.services.UserRedis;
+import com.vttp2022.BicycleParkingApp.models.parking.Value;
+import com.vttp2022.BicycleParkingApp.services.UserRepository;
+
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
 
 @RestController
-@RequestMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE,
+@RequestMapping(path = "/test", 
 produces = MediaType.APPLICATION_JSON_VALUE)
 public class HttpRestController {
   private static final Logger logger = LoggerFactory.getLogger(HttpRestController.class);
 
   @Autowired
-  UserRedis redisSvc;
+  UserRepository repo;
 
-  @PostMapping
-  public ResponseEntity<User> createUser(@RequestBody User user){
-    logger.info("User >>>"+user.getUsername());
-    int x = redisSvc.save(user);
-    if(x > 0)
-      user.setInsertCount(x);
-    return ResponseEntity.ok(user);
-  }
-  
-  /*
-  @GetMapping(path = "/userId={userId}")
-  public ResponseEntity<UserOld> getUserById(@PathVariable String userId){
-    UserOld u = redisSvc.findById(userId);
-    //logger.info(u.getUsername());
-    if(u == null)
-      logger.info("null");
-    else
-      logger.info(u.getUsername());
-    return ResponseEntity.ok(u);
-  }
-  */
+  @GetMapping("{username}")
+  public ResponseEntity<String> testing(@PathVariable String username){
+    logger.info("Retrieving user data(Rest Controller) > " + username);
 
-  @GetMapping(path = "/username={username}")
-  public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username){
+    Optional<User> optUser = repo.getFavourites(username);
+
+    if(optUser.isEmpty()){
+      logger.info("optUser is empty");
+      JsonObject haul = Json.createObjectBuilder()
+          .add("ERROR", "%s user not found".formatted(username))
+          .build();
+      
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(haul.toString());
+    }
     
-    Optional<User> u = redisSvc.findByUsername(username);
-    //logger.info("FavFound > " + String.valueOf(u.getFavFound()));
-    if(u.isPresent())
-      logger.info("User found");
-    else
-      logger.info("User not found");
-    return ResponseEntity.ok(u);
+    User user = optUser.get();
 
+    JsonArrayBuilder jaBuilder = Json.createArrayBuilder();
+    for(Value value: user.getFavourites())
+      jaBuilder.add(value.toJson());
+
+    JsonObject haul = Json.createObjectBuilder()
+        .add("value", jaBuilder.build())
+        .build();
+
+    return ResponseEntity.ok(haul.toString());
+    
   }
 
-
-  @PutMapping(path = "/{username}")
-  public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String username){
-    int uResult = redisSvc.update(user);
-    if(uResult > 0)
-      user.setUpdateCount(uResult);
-    return ResponseEntity.ok(user);
-  }
-
-  /*
-   * @Autowired
-  UserRedis redisSvc;
-
-  @PostMapping
-  public ResponseEntity<UserOld> createUser(@RequestBody UserOld user){
-    logger.info("User >>>"+user.getUsername());
-    int x = redisSvc.save(user);
-    if(x > 0)
-      user.setInsertCount(x);
-    return ResponseEntity.ok(user);
-  }
-  
-  @GetMapping(path = "/userId={userId}")
-  public ResponseEntity<UserOld> getUserById(@PathVariable String userId){
-    UserOld u = redisSvc.findById(userId);
-    //logger.info(u.getUsername());
-    if(u == null)
-      logger.info("null");
-    else
-      logger.info(u.getUsername());
-    return ResponseEntity.ok(u);
-  }
-
-  @GetMapping(path = "/username={username}")
-  public ResponseEntity<UserOld> getUserByUsername(@PathVariable String username){
-    UserOld u = redisSvc.findByUsername(username);
-    logger.info(u.getId());
-    return ResponseEntity.ok(u);
-  }
-
-
-  @PutMapping(path = "/{userId}")
-  public ResponseEntity<UserOld> updateUser(@RequestBody UserOld user, @PathVariable String userId){
-    int uResult = redisSvc.update(user);
-    if(uResult > 0)
-      user.setUpdateCount(uResult);
-    return ResponseEntity.ok(user);
-  }
-   */
-
-
-  
-   
-  
 }

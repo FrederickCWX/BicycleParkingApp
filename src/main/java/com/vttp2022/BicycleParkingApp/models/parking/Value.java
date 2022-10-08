@@ -2,25 +2,21 @@ package com.vttp2022.BicycleParkingApp.models.parking;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
-import org.slf4j.*;
+//import org.slf4j.*;
 
-import com.vttp2022.BicycleParkingApp.models.postal.Postal;
-import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
-import com.vttp2022.BicycleParkingApp.models.postal.Results;
-import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 import com.vttp2022.BicycleParkingApp.utilities.CalculateDistance;
 import com.vttp2022.BicycleParkingApp.utilities.CleanString;
 
+import jakarta.json.Json;
 import jakarta.json.JsonNumber;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.json.JsonString;
 
 public class Value implements Serializable{
-  private static final Logger logger = LoggerFactory.getLogger(Value.class);
+  //private static final Logger logger = LoggerFactory.getLogger(Value.class);
 
   private String id;
   private String img;
@@ -135,6 +131,29 @@ public class Value implements Serializable{
     return v;
   }
 
+  public static Value createFavJson(JsonObject jo){
+    Value v = new Value();
+
+    JsonString jsId = jo.getJsonString("id");
+    v.id = jsId.getString();
+    JsonString jsImg = jo.getJsonString("img");
+    v.img = jsImg.getString();
+    JsonString jsDesp = jo.getJsonString("description");
+    v.description = jsDesp.getString();
+    JsonNumber jnLat = jo.getJsonNumber("lat");
+    v.lat = jnLat.bigDecimalValue();
+    JsonNumber jnLng = jo.getJsonNumber("lng");
+    v.lng = jnLng.bigDecimalValue();
+    JsonString jsType = jo.getJsonString("rackType");
+    v.rackType = jsType.getString();
+    JsonNumber jnCount = jo.getJsonNumber("rackCount");
+    v.rackCount = jnCount.intValue();
+    JsonString jsShelter = jo.getJsonString("shelter");
+    v.shelter = jsShelter.getString();
+
+    return v;
+  }
+
   public static String createImgURL(BigDecimal lat, BigDecimal lng){
 
     StringBuilder sb = new StringBuilder();
@@ -152,6 +171,19 @@ public class Value implements Serializable{
     return url;
   }
 
-   
+  public JsonObject toJson(){
+    JsonObjectBuilder joBuilder = Json.createObjectBuilder();
+
+    joBuilder.add("id", this.id)
+        .add("img", this.img)
+        .add("description", this.description)
+        .add("lat", this.lat)
+        .add("lng", this.lng)
+        .add("rackType", this.rackType)
+        .add("rackCount", this.rackCount)
+        .add("shelter", this.shelter);
+
+    return joBuilder.build();
+  }
   
 }

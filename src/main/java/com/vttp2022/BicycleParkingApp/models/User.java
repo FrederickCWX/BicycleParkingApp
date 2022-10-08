@@ -4,8 +4,14 @@ import org.springframework.stereotype.Component;
 
 import com.vttp2022.BicycleParkingApp.models.parking.Value;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonObjectBuilder;
+
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.*;
@@ -14,111 +20,89 @@ import org.slf4j.*;
 public class User implements Serializable{
   private static final Logger logger = LoggerFactory.getLogger(User.class);
 
-  private static String username;
+  public static String username;
   private static List<Value> favourites;
-  private static int favFound;
-
-  private int insertCount;
-  private int updateCount;
-  private boolean upsert;
-
-  public User(){
-    logger.info("new user");
-    this.favourites = new ArrayList<>();
-    this.favFound = 0;
-  }
-
-  public User(String username){
-    logger.info("new user > "+username);
-    this.username = username;
-    this.favourites = new ArrayList<>();
-    this.favFound = 0;
-  }
-
-  public User(String username, List<Value> favourites){
-    this.username = username;
-    this.favourites = favourites;
-    this.favFound = favourites.size();
-  }
-
-  public static boolean addFavourite(Value value){
-    boolean found = false;
-    for(Value favourite: favourites){
-      if(favourite.getDescription().equals(value.getDescription()))
-        found = true;
-    }
-    if(found == false){
-      favourites.add(value);
-      favFound++;
-      return true;
-    }else
-      return false;
-  }
-
-  public static boolean removeFavourite(Value value){
-    boolean found = false;
-    for(int x=0; x < favourites.size(); x++){
-      if(favourites.get(x).getDescription().equals(value.getDescription())){
-        found = true;
-        favourites.remove(x);
-        favFound--;
-      }
-    }
-    if(found == true)
-      return true;
-    else
-      return false;
-  }
-
-
 
   public static String getUsername() {
     return username;
   }
-
-  public static void setUsername(String username) {
-    User.username = username;
+  public void setUsername(String username) {
+    this.username = username;
   }
-
   public static List<Value> getFavourites() {
     return favourites;
   }
-
-  public static void setFavourites(List<Value> favourites) {
-    User.favourites = favourites;
+  public void setFavourites(List<Value> favourites) {
+    this.favourites = favourites;
   }
 
-  public static int getFavFound() {
-    return favFound;
+  public static User createUser(String username){
+    User user = new User();
+    user.setUsername(username);
+    user.setFavourites(new LinkedList<>());
+    
+    return user;
   }
 
-  public static void setFavFound(int favFound) {
-    User.favFound = favFound;
+  public static User createUser(String username, List<Value> favourites){
+    User user = new User();
+    user.setUsername(username);
+    user.setFavourites(favourites);
+    
+    return user;
   }
 
   
-  public int getInsertCount() {
-    return insertCount;
-  }
-
-  public void setInsertCount(int insertCount) {
-    this.insertCount = insertCount;
-  }
-
-  public int getUpdateCount() {
-    return updateCount;
-  }
-
-  public void setUpdateCount(int updateCount) {
-    this.updateCount = updateCount;
-  }
-
-  public boolean isUpsert() {
-    return upsert;
-  }
-
-  public void setUpsert(boolean upsert) {
-    this.upsert = upsert;
+  public static void addFavourite(Value value){
+    logger.info("Pre-save");
+    favourites.add(value);
+    logger.info("Post-save > " + favourites.size());
   }
   
+
+  public static void rmvFavourite(int x){
+    logger.info("Pre-rmv > " + favourites.size());
+    favourites.remove(x);
+    logger.info("Post-rmv > " + favourites.size());
+  }
+
+  /*
+  public static void rmvFavourite(Value value){
+    favourites.remove(value);
+  }
+  */
+
+
+  /*
+  public static boolean removeFavourite(Value value){
+    boolean success = false;
+    for(Value favourite: favourites){
+      if(favourite.equals(value)){
+        favourites.remove(value);
+        success = true;
+      }
+    }
+
+    return success;
+  }
+  */
+
+  public JsonObject toJson(){
+    JsonObjectBuilder joBuilder = Json.createObjectBuilder();
+    joBuilder.add("username", this.username)
+        .add("value", toJsonArray());
+    
+    return joBuilder.build();
+    
+  }
+
+  private JsonArray toJsonArray(){
+    JsonArrayBuilder jaBuilder = Json.createArrayBuilder();
+    for(Value v: favourites){
+      jaBuilder.add(v.toJson());
+    }
+
+    return jaBuilder.build();
+  }
+
 }

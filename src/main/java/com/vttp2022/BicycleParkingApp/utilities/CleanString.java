@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.vttp2022.BicycleParkingApp.models.postal.Postal;
-import com.vttp2022.BicycleParkingApp.models.postal.PostalQuery;
 import com.vttp2022.BicycleParkingApp.models.postal.Results;
 import com.vttp2022.BicycleParkingApp.services.PostalAPIService;
 
@@ -15,12 +14,8 @@ public class CleanString {
     if(string.contains("-")){
       String[] postal = string.split("-");
       int postalCode = Integer.valueOf(postal[0]);
-
-      PostalQuery pq = new PostalQuery();
-      pq.setPostalCode(postalCode);
-      pq.setReturnGeom("Y");
-      pq.setGetAddrDetails("Y");
-      Optional<Postal> optPostal = PostalAPIService.getPostalDetails(pq);
+      
+      Optional<Postal> optPostal = PostalAPIService.getPostalDetails(postalCode);
 
       if(optPostal.isEmpty()){
         string = postal[0]+"-"+postal[1];

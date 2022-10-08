@@ -19,8 +19,6 @@ public class Parkings {
   private String metadata;
   private static List<Value> details = new ArrayList<>();
 
-  private Query query;
-
   private static String info;
 
   public String getMetadata(){
@@ -35,13 +33,6 @@ public class Parkings {
   }
   public void setValue(List<Value> details) {
     Parkings.details = details;
-  }
-
-  public Query getQuery(){
-    return query;
-  }
-  public void setQuery(Query query){
-    this.query = query;
   }
 
   public static String getInfo(){

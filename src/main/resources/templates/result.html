@@ -12,7 +12,7 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="navbar fixed-top navbar-expand-lg navbar-light justify-content-between" style="background-color: #A63B4D; margin-top: 2%; width: 95%; height: 120px; margin-left: auto; margin-right: auto; border-radius: 20px;">
-          <a class="navbar-brand" th:href="@{/Search}">
+          <a class="navbar-brand" th:href="@{/search}">
             <img th:src="@{/images/SGBP_Reg.png}" height="100px" style="padding-left: 30px;">
           </a>
   
@@ -22,7 +22,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto fs-3 fw-bold" style="padding-right: 2%;">
               <li class="nav-item active">
-                <a class="nav-link" th:href="@{/Search}">SEARCH</a>
+                <a class="nav-link" th:href="@{/search}">SEARCH</a>
               </li>
               <li class="nav-item px-4">
                 <a class="nav-link" style="padding-left: 10px;" th:href="@{/favourite}">FAVOURITE</a>
@@ -93,9 +93,36 @@
                         <!--
                         <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
                         -->
+
+                        
+                        <form method="POST" action="/saveParking">
+                          <!--
+                          <input type="hidden" name="name" data-th-value="${name}">
+                          -->
+                          
+                          <input type="hidden" name="id" data-th-value="${detail.id}">
+                          <!--
+                          <input type="hidden" name="lat" data-th-value="${detail.lat}">
+                          <input type="hidden" name="lng" data-th-value="${detail.lng}">
+                          -->
+                          <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
+                        </form>
+                        
+
+                        <!--
+                        <form method="POST" action="/saveParking">
+                          <input type="hidden" name="lat" data-th-value="${detail.lat}">
+                          <input type="hidden" name="lng" data-th-value="${detail.lng}">
+                          <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
+                        </form>
+                        -->
+
+
+                        <!--
                         <a th:href="@{/result/add/{detailId}(detailId=${detail.id})}">  
                           <button class="btn btn-secondary fs-5">Add to favourite</button>
                         </a>
+                      -->
                       </td>
                     </tr>
                   </tbody>
