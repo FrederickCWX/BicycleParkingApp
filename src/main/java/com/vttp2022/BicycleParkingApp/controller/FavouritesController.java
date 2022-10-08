@@ -21,7 +21,7 @@ public class FavouritesController {
   private static final Logger logger = LoggerFactory.getLogger(FavouritesController.class);
 
   @Autowired
-  private UserRepository uRepo;
+  private UserRepository usrRepo;
   
   @Autowired
   User usr;
@@ -29,9 +29,9 @@ public class FavouritesController {
   @GetMapping
   public String showFavourites(Model model){
 
-    logger.info("/showFavourites > " + usr.getUsername());
+    logger.info("Show favourites html, user > " + usr.getUsername());
 
-    Optional<User> optUser = uRepo.getFavourites(usr.getUsername());
+    Optional<User> optUser = usrRepo.getFavourites(usr.getUsername());
 
     String info;
 
@@ -44,10 +44,6 @@ public class FavouritesController {
     User user = optUser.get();
 
     List<Value> favList = user.getFavourites();
-
-    for(int x=0; x<favList.size(); x++){
-      logger.info("FavList Parking " + x + " ID > " +favList.get(x).getId());
-    }
 
     if(favList.size() == 0){
       info = "You have 0 saved bicycle parking location(s)";

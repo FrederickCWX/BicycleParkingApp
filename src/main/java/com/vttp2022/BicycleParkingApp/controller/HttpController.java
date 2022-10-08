@@ -18,7 +18,6 @@ public class HttpController {
 
   @GetMapping("/")
   public String loginPage(Model model){
-    logger.info("Load index.html");
     usr = new User();
     model.addAttribute("user", usr);
     return "index";

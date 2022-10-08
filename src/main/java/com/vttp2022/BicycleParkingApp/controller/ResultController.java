@@ -40,13 +40,12 @@ public class ResultController {
   @GetMapping
   public String searchParking(@RequestParam(value = "PostalCode", required = true) String postal, @RequestParam(value = "Dist", required = false) String radius, Model model){
 
-    logger.info("/search > " + usr.getUsername());
+    logger.info("Search parking html, user > " + usr.getUsername());
     Query q = new Query();
     Optional<Postal> optPostal = postalSvc.getPostalDetails(Integer.parseInt(postal));
 
     if(Postal.getFound() == 0){
       String info = "Postal code invalid, please key in a valid postal code";
-      //model.addAttribute("username", usr.getUsername());
       model.addAttribute("respDetails", info);
       model.addAttribute("parkings", new Parkings());
       return "result";
@@ -79,14 +78,14 @@ public class ResultController {
     sb.append(postal);
     Parkings.setInfo(sb.toString());
 
-    logger.info(Parkings.getInfo());
-
     model.addAttribute("respDetails", Parkings.getInfo());
     if(val.size() > 0){
       model.addAttribute("details", val);
     }
 
     model.addAttribute("Radius", q.getRadius());
+
+    logger.info("Search successful, results > " + Parkings.getInfo());
 
     return "result";
   }

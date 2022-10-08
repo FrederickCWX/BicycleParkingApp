@@ -79,50 +79,10 @@
                     </tr>
                     <tr>
                       <td class="col-md-3" colspan="2">
-                        <!--
-                        <form 
-                        method="POST" 
-                        action="#"
-                        th:object="${detail}"
-                        name="saveDetail"
-                        id="saveDetail"
-                        >
-                          <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
-                        </form>
-                        -->
-                        <!--
-                        <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
-                        -->
-
-                        
                         <form method="POST" action="/saveParking">
-                          <!--
-                          <input type="hidden" name="name" data-th-value="${name}">
-                          -->
-                          
                           <input type="hidden" name="id" data-th-value="${detail.id}">
-                          <!--
-                          <input type="hidden" name="lat" data-th-value="${detail.lat}">
-                          <input type="hidden" name="lng" data-th-value="${detail.lng}">
-                          -->
                           <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
                         </form>
-                        
-
-                        <!--
-                        <form method="POST" action="/saveParking">
-                          <input type="hidden" name="lat" data-th-value="${detail.lat}">
-                          <input type="hidden" name="lng" data-th-value="${detail.lng}">
-                          <button type="submit" class="btn btn-secondary fs-5">Add to favourite</button>
-                        </form>
-                        -->
-
-
-                        <!--
-                        <a th:href="@{/result/add/{detailId}(detailId=${detail.id})}">  
-                          <button class="btn btn-secondary fs-5">Add to favourite</button>
-                        </a>
-                      -->
                       </td>
                     </tr>
                   </tbody>
@@ -133,7 +93,6 @@
         </div>
       </div>
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>

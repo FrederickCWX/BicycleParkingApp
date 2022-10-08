@@ -19,7 +19,6 @@ public class PostalAPIService {
 
   private static String URL = "https://developers.onemap.sg/commonapi/search";
 
-  //public static Optional<Postal> getPostalDetails(PostalQuery q){
   public static Optional<Postal> getPostalDetails(int postal){
 
     String postalUrl = UriComponentsBuilder.fromUriString(URL)

@@ -9,7 +9,6 @@ public class CalculateDistance {
 
   public static String getDistance(BigDecimal latitude1, BigDecimal latitude2, BigDecimal longitude1, BigDecimal longitude2){
     double earthRadius = 6371;
-
     
     double lat1 = Math.toRadians(latitude1.doubleValue());
     double lat2 = Math.toRadians(latitude2.doubleValue());
@@ -29,7 +28,6 @@ public class CalculateDistance {
     double distanceMetre = distanceKm * 1000;
 
     return df.format(distanceMetre);
-
     
   }
   

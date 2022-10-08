@@ -51,7 +51,6 @@ public class User implements Serializable{
     
     return user;
   }
-
   
   public static void addFavourite(Value value){
     logger.info("Pre-save");
@@ -65,27 +64,6 @@ public class User implements Serializable{
     favourites.remove(x);
     logger.info("Post-rmv > " + favourites.size());
   }
-
-  /*
-  public static void rmvFavourite(Value value){
-    favourites.remove(value);
-  }
-  */
-
-
-  /*
-  public static boolean removeFavourite(Value value){
-    boolean success = false;
-    for(Value favourite: favourites){
-      if(favourite.equals(value)){
-        favourites.remove(value);
-        success = true;
-      }
-    }
-
-    return success;
-  }
-  */
 
   public JsonObject toJson(){
     JsonObjectBuilder joBuilder = Json.createObjectBuilder();

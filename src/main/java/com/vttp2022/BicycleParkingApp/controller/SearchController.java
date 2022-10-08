@@ -25,18 +25,21 @@ public class SearchController {
   @PostMapping
   public String showSearchPage(@RequestParam(value = "Username", required = true) String username, Model model){
 
+    logger.info("Search html, user > " + usr.getUsername());
+
     usr.setUsername(username);
 
     model.addAttribute("postal", new Postal());
     model.addAttribute("parkings", new Parkings());
 
-    logger.info("Post / > " + usr.getUsername());
     return "search";
   }
 
   @GetMapping
   public String showSearchPage(Model model){
-    logger.info("/Search > " + usr.getUsername());
+    
+    logger.info("Search html, user > " + usr.getUsername());
+
     return "search";
   }
   

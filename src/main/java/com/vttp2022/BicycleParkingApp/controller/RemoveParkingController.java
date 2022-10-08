@@ -21,17 +21,16 @@ public class RemoveParkingController {
   private static final Logger logger = LoggerFactory.getLogger(RemoveParkingController.class);
 
   @Autowired
-  UserRepository uRepo;
+  UserRepository usrRepo;
 
   @Autowired
   User usr;
 
   @PostMapping
   public String rmvFav(@RequestBody String form, Model model){
-    logger.info("/removeParking > " + usr.getUsername());
+    logger.info("Remove favourites html, user > " + usr.getUsername());
 
     String parkingID = form.replace("id=", "");
-    logger.info("Parking ID to rmv > " + parkingID);
 
     List<Value> favList = usr.getFavourites();
 
@@ -40,7 +39,7 @@ public class RemoveParkingController {
         usr.rmvFavourite(x);
     }
 
-    uRepo.saveFav();
+    usrRepo.saveUser();
 
     List<Value> newFavList = usr.getFavourites();
 

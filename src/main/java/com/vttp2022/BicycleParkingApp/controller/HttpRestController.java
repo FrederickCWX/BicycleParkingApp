@@ -21,19 +21,19 @@ import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 
 @RestController
-@RequestMapping(path = "/test", 
+@RequestMapping(path = "/user", 
 produces = MediaType.APPLICATION_JSON_VALUE)
 public class HttpRestController {
   private static final Logger logger = LoggerFactory.getLogger(HttpRestController.class);
 
   @Autowired
-  UserRepository repo;
+  UserRepository usrRepo;
 
   @GetMapping("{username}")
   public ResponseEntity<String> testing(@PathVariable String username){
-    logger.info("Retrieving user data(Rest Controller) > " + username);
+    logger.info("Request user data(Rest Controller) > " + username);
 
-    Optional<User> optUser = repo.getFavourites(username);
+    Optional<User> optUser = usrRepo.getFavourites(username);
 
     if(optUser.isEmpty()){
       logger.info("optUser is empty");

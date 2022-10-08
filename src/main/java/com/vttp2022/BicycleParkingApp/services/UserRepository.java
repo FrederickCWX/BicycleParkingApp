@@ -34,10 +34,8 @@ public class UserRepository {
   @Autowired
   User usr;
 
-  public void saveFav(){
+  public void saveUser(){
 
-    logger.info("Save to REPO");
-    logger.info("REPO username: "+usr.getUsername());
     ListOperations<String, String> listOps = redisTemplate.opsForList();
 
     if(!redisTemplate.hasKey(usr.getUsername())){
@@ -49,12 +47,13 @@ public class UserRepository {
     logger.info("Saving user");
     redisTemplate.delete(usr.getUsername());
     listOps.leftPush(usr.getUsername(), toJson(usr.getFavourites()).toString());
+
+    logger.info("User > " + usr.getUsername() + " save successful");
   }
 
   public Optional<User> getFavourites(String username){
     if(!redisTemplate.hasKey(username))
       return Optional.empty();
-    
     
     ListOperations<String, String> listOps = redisTemplate.opsForList();
     String haul = "";

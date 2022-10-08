@@ -56,12 +56,6 @@
                         <th class="col-md-3">Description: </th>
                         <td><span th:text="${detail.description}"></span></td>
                       </tr>
-                      <!--
-                      <tr>
-                        <th class="col-md-3">Distance: </th>
-                        <td><span th:text="${detail.distance}"></span> metres</td>
-                      </tr>
-                    -->
                       <tr>
                         <th class="col-md-3">Rack Type: </th>
                         <td><span th:text="${detail.rackType}"></span></td>
@@ -74,16 +68,8 @@
                         <th class="col-md-3">Sheltered bay: </th>
                         <td><span th:text="${detail.shelter}"></span></td>
                       </tr>
-                      <!--
-                      <tr>
-                        <th class="col-md-3">ID: </th>
-                        <td><span th:text="${detail.id}"></span></td>
-                      </tr>
-                    -->
                       <tr>
                         <td class="col-md-3" colspan="2">
-  
-                          
                           <form method="POST" action="/removeParking">
                             <input type="hidden" name="id" data-th-value="${detail.id}">
                             <button type="submit" class="btn btn-secondary fs-5">Remove from favourite</button>
@@ -98,25 +84,7 @@
           </div>
         </div>
       </div>
-
-      
-
-      <!--
-      <div class="container-fluid">
-        <div class="row">
-          <div class="mx-auto" style="margin-top: 10%;">
-            <h2 class="text-center fw-bold">This function is currently unavailable</h2>
-          </div>
-        </div>
-        <div class="row">
-          <img th:src="@{/images/ComingSoonP5.gif}" class="rounded mx-auto d-block" style="height: 40vh; width:auto;">
-        </div>
-      </div>
-      -->
-
-
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
