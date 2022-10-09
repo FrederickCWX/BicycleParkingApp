@@ -53,16 +53,12 @@ public class User implements Serializable{
   }
   
   public static void addFavourite(Value value){
-    logger.info("Pre-save");
     favourites.add(value);
-    logger.info("Post-save > " + favourites.size());
   }
   
 
   public static void rmvFavourite(int x){
-    logger.info("Pre-rmv > " + favourites.size());
     favourites.remove(x);
-    logger.info("Post-rmv > " + favourites.size());
   }
 
   public JsonObject toJson(){

@@ -59,7 +59,6 @@ public class Parkings {
 
         Parkings.details = requested;
       }
-      logger.info("Parking Json response read");
     }
     return p;
   }

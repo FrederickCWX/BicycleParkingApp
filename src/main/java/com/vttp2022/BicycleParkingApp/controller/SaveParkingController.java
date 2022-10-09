@@ -43,23 +43,30 @@ public class SaveParkingController {
           fList.add(val);
           usr.createUser(usr.getUsername(), fList);
         }else{
-          usr.addFavourite(val);
+          List<Value> favList = usr.getFavourites();
+          Boolean foundDuplicate = false;
+          for(Value fav: favList){
+            if(fav.getDescription().equals(val.getDescription()) && fav.getLat().equals(val.getLat()) && fav.getLng().equals(val.getLng()))
+              foundDuplicate = true;
+          }
+          if(foundDuplicate == false)
+            usr.addFavourite(val);
         }
       }
     }
 
     usrRepo.saveUser();
 
-    List<Value> favList = usr.getFavourites();
+    List<Value> newFavList = usr.getFavourites();
 
-    if(favList.size() == 0){
+    if(newFavList.size() == 0){
       String info = "You have 0 saved bicycle parking location(s)";
       model.addAttribute("info", info);
       return "favourite";
     }else{
-      String info = "You have "+favList.size()+" saved bicycle parking location(s)";
+      String info = "You have "+newFavList.size()+" saved bicycle parking location(s)";
       model.addAttribute("info", info);
-      model.addAttribute("details", favList);
+      model.addAttribute("details", newFavList);
     }
 
     logger.info("Parking save to favourites succesfully");

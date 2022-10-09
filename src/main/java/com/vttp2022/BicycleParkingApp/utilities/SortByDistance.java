@@ -10,6 +10,7 @@ public class SortByDistance implements Comparator<Value>{
 
     if (Double.parseDouble(a.getDistance()) < Double.parseDouble(b.getDistance())) return -1;
     if (Double.parseDouble(a.getDistance()) > Double.parseDouble(b.getDistance())) return 1;
+    
     return 0;
   }
   

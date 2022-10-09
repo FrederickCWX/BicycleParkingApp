@@ -28,7 +28,7 @@ public class ParkingAPIService {
       .queryParam("Long", q.getLng())
       .queryParam("Dist", q.getRadius())
       .toUriString();
-    logger.info(parkingUrl);
+    //logger.info(parkingUrl);
     RestTemplate template = new RestTemplate();
     ResponseEntity<String> resp = null;
 

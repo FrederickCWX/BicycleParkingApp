@@ -52,6 +52,7 @@ public class UserRepository {
   }
 
   public Optional<User> getFavourites(String username){
+
     if(!redisTemplate.hasKey(username))
       return Optional.empty();
     

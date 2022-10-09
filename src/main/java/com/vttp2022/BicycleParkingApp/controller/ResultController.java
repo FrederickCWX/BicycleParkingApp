@@ -61,7 +61,7 @@ public class ResultController {
 
     if(optParking.isEmpty()){
       model.addAttribute("parkings", new Parkings());
-      return "result";
+      return "error";
     }
 
     Collections.sort(Parkings.getValue(), new SortByDistance());

@@ -8,6 +8,7 @@ public class CalculateDistance {
   private static final DecimalFormat df = new DecimalFormat("#.##");
 
   public static String getDistance(BigDecimal latitude1, BigDecimal latitude2, BigDecimal longitude1, BigDecimal longitude2){
+    
     double earthRadius = 6371;
     
     double lat1 = Math.toRadians(latitude1.doubleValue());
