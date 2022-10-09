@@ -32,6 +32,11 @@ public class SaveParkingController {
   public String saveFav(@RequestBody String form, Model model){
     logger.info("Save favourites html, user > " + usr.getUsername());
 
+    if(usr.getUsername() == null){
+      model.addAttribute("errorInfo", "Login to use favourites function!");
+      return "error";
+    }
+
     String parkingID = form.replace("id=", "");
 
     List<Value> vals = Parkings.getValue();

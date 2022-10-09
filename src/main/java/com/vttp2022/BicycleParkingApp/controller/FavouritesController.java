@@ -31,6 +31,11 @@ public class FavouritesController {
 
     logger.info("Show favourites html, user > " + usr.getUsername());
 
+    if(usr.getUsername() == null){
+      model.addAttribute("errorInfo", "Login to use favourites function!");
+      return "error";
+    }
+
     Optional<User> optUser = usrRepo.getFavourites(usr.getUsername());
 
     String info;

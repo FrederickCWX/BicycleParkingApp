@@ -33,12 +33,16 @@
           </div>
         </nav>
       </div>
-      <div class="position-absolute top-50 start-50 translate-middle" style="width: 100vw;">
+      <div class="row" style="width: 100vw;">
         <div class="row">
+          <div class="mx-auto" style="margin-top: 2%;">
+            <h2 class="text-center fw-bold">
+              <a class="nav-link" th:href="@{/}">
+                <span th:text="${errorInfo}"></span>
+              </a>
+            </h2>
+          </div>
           <div class="mx-auto">
-            <!--
-            <h2 class="text-center fw-bold">ERROR</h2>
-            -->
             <img class="position-absolute top-50 start-50 translate-middle" th:src="@{/images/Error.gif}" height="500px">
           </div>
         </div>

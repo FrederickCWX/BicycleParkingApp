@@ -25,7 +25,7 @@ public class SearchController {
   @PostMapping
   public String showSearchPage(@RequestParam(value = "Username", required = true) String username, Model model){
 
-    logger.info("Search html, user > " + usr.getUsername());
+    logger.info("Search html, user > " + username);
 
     usr.setUsername(username);
 

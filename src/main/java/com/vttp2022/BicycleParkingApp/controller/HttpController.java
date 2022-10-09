@@ -20,6 +20,8 @@ public class HttpController {
   public String loginPage(Model model){
     usr = new User();
     model.addAttribute("user", usr);
+    logger.info("Username > ");
+    logger.info(usr.getUsername());
     return "index";
   }
 
